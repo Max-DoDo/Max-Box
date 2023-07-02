@@ -1,6 +1,6 @@
-package GUI;
+package pro;
 
-import Tool.MColor;
+import tools.MColor;
 
 import javax.swing.*;
 import java.awt.*;

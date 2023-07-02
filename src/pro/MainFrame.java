@@ -1,8 +1,8 @@
-package GUI;
+package pro;
 
-import Tool.MColor;
-import Tool.PropertiesReader;
-import Tool.Tools;
+import tools.MColor;
+import tools.PropertiesReader;
+import tools.Tools;
 
 import javax.swing.*;
 
@@ -206,7 +206,7 @@ public class MainFrame extends JFrame {
      * 超级难看的方法. 用来让这个窗体中的子类控件MainPanel切换显示
      * 一人提高了耦合度
      * @param panelName 组件的名字
-     * @see Tool.Constant
+     * @see tools.Constant
      */
     public void switchPanel(String panelName){
         mainPanel.switchPanel(panelName);

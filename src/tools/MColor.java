@@ -1,4 +1,4 @@
-package Tool;
+package tools;
 
 import java.awt.Color;
 
@@ -41,22 +41,51 @@ public class MColor {
     public final static Color LIGHT_BLUE = new Color(145, 213, 255);
     public final static Color WHITE_BLUE = new Color(230, 247, 255);
 
+    /**
+     * 存储当前的颜色模式
+     */
     public static int colorStyle;
 
+    /**
+     * 主面板颜色
+     */
     public static Color MAIN_PANEL;
 
+    /**
+     * 标题栏颜色
+     */
     public static Color TITLE_PANEL;
 
+    /**
+     * 侧边功能栏颜色
+     */
     public static Color SIDE_PANEL;
 
+    /**
+     * 分割线颜色
+     */
     public static Color LINE;
 
+    /**
+     * 按钮颜色
+     */
     public static Color BUTTON_NORMAL;
 
+    /**
+     * 按钮选中颜色
+     */
+    public static Color BUTTON_SELECTING;
+
+    /**
+     * 按钮点击时颜色
+     */
     public static Color BUTTON_PRESSING;
 
-    public static Color BUTTON_PRESSED;
 
+    /**
+     * 设置颜色模式. 这将会影响所有静态颜色的值
+     * @param style 颜色模式常数. 详见{@link MColor#colorStyle}
+     */
     public static void setColorStyle(int style){
 
         colorStyle = style;
@@ -74,8 +103,8 @@ public class MColor {
         SIDE_PANEL = BLACK;
         LINE = new Color(82, 82, 82);
         BUTTON_NORMAL = new Color(71, 158, 245);
-        BUTTON_PRESSING = Color.BLACK;
-        BUTTON_PRESSED = new Color(8, 35, 56);
+        BUTTON_SELECTING = Color.BLACK;
+        BUTTON_PRESSING = new Color(8, 35, 56);
 
     }
 
@@ -85,8 +114,8 @@ public class MColor {
         SIDE_PANEL = GHOST_WHITE;
         LINE = new Color(224, 224, 224);
         BUTTON_NORMAL = new Color(15, 108, 189);
-        BUTTON_PRESSING = new Color(235, 235, 235);
-        BUTTON_PRESSED = new Color(207, 228, 250);
+        BUTTON_SELECTING = new Color(235, 235, 235);
+        BUTTON_PRESSING = new Color(207, 228, 250);
 
     }
 

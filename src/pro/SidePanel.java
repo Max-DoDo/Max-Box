@@ -1,8 +1,8 @@
-package GUI;
+package pro;
 
-import Tool.Constant;
-import Tool.MColor;
-import Tool.PropertiesReader;
+import tools.Constant;
+import tools.MColor;
+import tools.PropertiesReader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

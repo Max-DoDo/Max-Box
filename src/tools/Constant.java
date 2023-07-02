@@ -1,4 +1,4 @@
-package Tool;
+package tools;
 
 public final class Constant {
     

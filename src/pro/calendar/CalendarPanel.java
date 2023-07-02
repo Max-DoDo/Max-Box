@@ -1,4 +1,6 @@
-package GUI;
+package pro.calendar;
+
+import pro.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +20,12 @@ import java.awt.*;
  **/
 public class CalendarPanel extends JPanel {
 
+    /**
+     * 默认的构造函数
+     */
     public CalendarPanel(){
+
+
         this.setBackground(Color.PINK);
     }
 

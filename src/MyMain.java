@@ -1,6 +1,6 @@
 
 
-import GUI.MainFrame;
+import pro.MainFrame;
 
 /**
  * <p> 

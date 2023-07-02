@@ -1,4 +1,4 @@
-package GUI;
+package pro.calendar;
 
 import javax.swing.*;
 
@@ -14,4 +14,9 @@ import javax.swing.*;
  * @date 2023/07/01 22:16
  **/
 public class DateGird extends JButton {
+
+    public DateGird(){
+
+    }
+
 }
