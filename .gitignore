@@ -1,1 +1,10 @@
-.class
+
+#编译的Java字节码文件
+*.class
+
+#输出文件
+\out
+
+#idea的项目配置文件
+
+\.idea
