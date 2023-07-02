@@ -10,12 +10,12 @@ import java.awt.Color;
  */
 public class MColor {
 
-    public static final int DARK_STYLE = 1;
     public static final int LIGHT_STYLE = 0;
+    public static final int DARK_STYLE = 1;
     public static final int USER_DEFINE_STYLE = -1;
 
-    public final static Color BLACK = new Color(31, 31, 31);
-    public final static Color LIGHT_BLACK = new Color(41, 41, 41);
+    public final static Color BLACK = new Color(10, 10, 10);
+    public final static Color LIGHT_BLACK = new Color(31, 31, 31);
 
     public final static Color DARK_GRAY = new Color(100, 100, 100);
     public final static Color GRAY = new Color(167, 171, 175);
@@ -45,6 +45,8 @@ public class MColor {
 
     public static Color MAIN_PANEL;
 
+    public static Color TITLE_PANEL;
+
     public static Color SIDE_PANEL;
 
     public static Color LINE;
@@ -67,8 +69,9 @@ public class MColor {
     }
 
     private static void darkStyle() {
-        MAIN_PANEL = BLACK;
-        SIDE_PANEL = LIGHT_BLACK;
+        MAIN_PANEL = LIGHT_BLACK;
+        TITLE_PANEL = BLACK;
+        SIDE_PANEL = BLACK;
         LINE = new Color(82, 82, 82);
         BUTTON_NORMAL = new Color(71, 158, 245);
         BUTTON_PRESSING = Color.BLACK;
@@ -78,6 +81,7 @@ public class MColor {
 
     private static void lightStyle() {
         MAIN_PANEL = DARK_WHITE;
+        TITLE_PANEL = GHOST_WHITE;
         SIDE_PANEL = GHOST_WHITE;
         LINE = new Color(224, 224, 224);
         BUTTON_NORMAL = new Color(15, 108, 189);

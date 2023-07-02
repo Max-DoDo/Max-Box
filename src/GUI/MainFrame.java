@@ -34,12 +34,12 @@ public class MainFrame extends JFrame {
      * 因为这个项目的名字叫做M"Tools". 因此我决定让这个程序拥有许许多多我日常可能会用到的奇怪的功能, 因此在底层面板的右侧有一个小小的竖着
      * 的面板, 这个面板用于存放不同的功能, 例如"日历"按钮和"记事本"按钮
      */
-    private JPanel functionPanel;
+    private SidePanel sidePanel;
 
     /**
      * 主面板, 用于承载主要面板控件
      */
-    private JPanel mainPanel;
+    private MainPanel mainPanel;
 
     /**
      * 存储屏幕的宽度
@@ -67,8 +67,8 @@ public class MainFrame extends JFrame {
         //初始化面板们
         basePanel = (JPanel) this.getContentPane();
         titlePanel = new TitlePanel();
-        functionPanel = new JPanel();
-        mainPanel = new JPanel();
+        sidePanel = new SidePanel();
+        mainPanel = new MainPanel();
 
     }
 
@@ -79,6 +79,8 @@ public class MainFrame extends JFrame {
      * 这个方法会依次调用每一个主窗体上的控件的初始化方法来完成整个窗体的初始化
      */
     public void run() {
+
+        Tools.println("主窗体初始化");
 
         //获得屏幕的宽高比
         int[] screenSize = Tools.getScreenSize();
@@ -100,7 +102,7 @@ public class MainFrame extends JFrame {
     private void init() {
 
         //重绘面板的颜色
-        reColor();
+        rePaint();
 
         //初始化主窗体框架
         initMainFrame();
@@ -108,6 +110,14 @@ public class MainFrame extends JFrame {
         //初始化标题面板
         titlePanel.init();
         this.add(titlePanel);
+
+        //初始化侧栏面板
+        sidePanel.init();
+        this.add(sidePanel);
+
+        //初始化主面板
+        mainPanel.init();
+        this.add(mainPanel);
 
         //设置窗口可见性为可见
         this.setVisible(true);
@@ -147,12 +157,12 @@ public class MainFrame extends JFrame {
      * <p>
      * 从配置文件中调用UI的主题类型来获得不同的颜色集
      */
-    private void reColor() {
+    private void rePaint() {
         //设置UI配色
 
         basePanel.setBackground(MColor.MAIN_PANEL);
         titlePanel.setBackground(MColor.SIDE_PANEL);
-        functionPanel.setBackground(MColor.SIDE_PANEL);
+        sidePanel.setBackground(MColor.SIDE_PANEL);
         mainPanel.setBackground(MColor.MAIN_PANEL);
 
     }
@@ -173,7 +183,7 @@ public class MainFrame extends JFrame {
             this.isFullScreen = true;
         }
 
-        resizeAll();
+        rePaintAll();
         Tools.println("修改窗体大小");
 
     }
@@ -184,8 +194,11 @@ public class MainFrame extends JFrame {
      * 这要求所有子控件都重写repaint方法来重绘他们的大小
      * </p>
      */
-    public void resizeAll() {
+    public void rePaintAll() {
+        this.rePaint();
         titlePanel.rePaint();
+        sidePanel.rePaint();
+        mainPanel.rePaint();
     }
 
     /**

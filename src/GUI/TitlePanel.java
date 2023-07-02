@@ -1,5 +1,6 @@
 package GUI;
 
+import Tools.Constant;
 import Tools.MColor;
 import Tools.PropertiesReader;
 
@@ -50,6 +51,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
     private JButton resizeButton;
 
     private ImageIcon resizeIcon;
+
     private ImageIcon resizeIcon2;
 
     /**
@@ -58,6 +60,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
     private JButton exitButton;
 
     private ImageIcon exitIcon;
+
     private ImageIcon exitIcon2;
 
     /**
@@ -65,16 +68,15 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
      */
     private JButton settingButton;
 
-    private int titlePanelWidth;
+    private int width;
 
-    private int titlePanelHeight;
+    private int height;
 
 
     /**
      * 默认构造函数
      */
     public TitlePanel() {
-
         super();
     }
 
@@ -83,9 +85,9 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
      */
     public void init() {
 
-        titlePanelWidth = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
-        titlePanelHeight = 46;
-        this.setSize(titlePanelWidth, titlePanelHeight);
+        width = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
+        height = Constant.TITLE_PANEL_HEIGHT;
+        this.setSize(width, height);
         this.setLayout(null);
 
         this.initIcon();
@@ -145,9 +147,9 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
         exitButton.setSize(width, height);
 
         //设置背景颜色
-        closeButton.setBackground(MColor.SIDE_PANEL);
-        resizeButton.setBackground(MColor.SIDE_PANEL);
-        exitButton.setBackground(MColor.SIDE_PANEL);
+        closeButton.setBackground(MColor.TITLE_PANEL);
+        resizeButton.setBackground(MColor.TITLE_PANEL);
+        exitButton.setBackground(MColor.TITLE_PANEL);
 
         //设置位置
         closeButton.setLocation(oriX, y);
@@ -213,7 +215,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
         settingButton = new JButton(new ImageIcon(".\\resource\\settingIcon.png"));
 
         //设置背景颜色
-        settingButton.setBackground(MColor.SIDE_PANEL);
+        settingButton.setBackground(MColor.TITLE_PANEL);
 
         //去掉焦点和边框
         settingButton.setBorderPainted(false);
@@ -227,6 +229,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
 
         //设置监听
         settingButton.addActionListener(this);
+        settingButton.addMouseListener(this);
 
         this.add(settingButton);
     }
@@ -247,8 +250,8 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
     public void rePaintSelf() {
 
         //本体的相关设置
-        titlePanelWidth = this.getRootPane().getParent().getWidth();
-        this.setSize(titlePanelWidth, titlePanelHeight);
+        width = this.getRootPane().getParent().getWidth();
+        this.setSize(width, height);
 
     }
 
@@ -259,9 +262,10 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
 
 
         //设置背景颜色
-        closeButton.setBackground(MColor.SIDE_PANEL);
-        resizeButton.setBackground(MColor.SIDE_PANEL);
-        exitButton.setBackground(MColor.SIDE_PANEL);
+        closeButton.setBackground(MColor.TITLE_PANEL);
+        resizeButton.setBackground(MColor.TITLE_PANEL);
+        exitButton.setBackground(MColor.TITLE_PANEL);
+        settingButton.setBackground(MColor.TITLE_PANEL);
 
         //计算位置
         int width = this.getHeight() + 10;
@@ -297,7 +301,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
     /**
      * 最小化窗体按钮的实现
      */
-    private void closeButton() {
+    private void closeButtonClick() {
 
         MainFrame mf = (MainFrame) this.getRootPane().getParent();
         /*
@@ -314,7 +318,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
     /**
      * 调整窗口大小按钮的实现
      */
-    private void reSizeButton() {
+    private void reSizeButtonClick() {
 
         //获得主框架的引用
         MainFrame mf = (MainFrame) this.getRootPane().getParent();
@@ -333,7 +337,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
      * <p>
      *     把皮球踢给主框架那边让它处理和退出相关的事情
      */
-    private void exitButton(){
+    private void exitButtonClick(){
         MainFrame mf = (MainFrame) this.getRootPane().getParent();
         mf.exit();
     }
@@ -341,7 +345,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
     /**
      * 设置按钮的单击事件相应方法
      */
-    private void settingButton(){
+    private void settingButtonClick(){
 
     }
 
@@ -366,13 +370,13 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
 
         //修改大小按钮
         if (source.equals(resizeButton)) {
-            reSizeButton();
+            reSizeButtonClick();
             return;
         }
 
         //最小化按钮和弹出菜单最小化选项
         if (name.equals(menuItemName[1]) || source.equals(closeButton)) {
-            closeButton();
+            closeButtonClick();
             return;
         }
 
@@ -386,12 +390,12 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
 
         //弹出菜单退出选项和退出按钮
         if (name.equals(menuItemName[3]) || source.equals(exitButton)) {
-            exitButton();
+            exitButtonClick();
             return;
         }
 
         if(source.equals(settingButton)){
-            settingButton();
+            settingButtonClick();
             return;
         }
 
@@ -423,6 +427,11 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
         if (component.equals(exitButton)) {
             exitButton.setBackground(MColor.RED);
             exitButton.setIcon(exitIcon2);
+            return;
+        }
+
+        if(component.equals(settingButton)){
+            settingButton.setBackground(MColor.DARK_WHITE);
             return;
         }
 
