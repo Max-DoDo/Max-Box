@@ -1,8 +1,8 @@
 package GUI;
 
-import Tools.Constant;
-import Tools.MColor;
-import Tools.PropertiesReader;
+import Tool.Constant;
+import Tool.MColor;
+import Tool.PropertiesReader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,6 +89,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
         height = Constant.TITLE_PANEL_HEIGHT;
         this.setSize(width, height);
         this.setLayout(null);
+        this.setBackground(MColor.TITLE_PANEL);
 
         this.initIcon();
         this.initButton();

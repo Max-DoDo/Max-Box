@@ -1,8 +1,8 @@
 package GUI;
 
-import Tools.Constant;
-import Tools.MColor;
-import Tools.PropertiesReader;
+import Tool.Constant;
+import Tool.MColor;
+import Tool.PropertiesReader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -64,7 +64,7 @@ public class SidePanel extends JPanel implements ActionListener {
 
         width = Constant.SIDE_PANEL_WIDTH;
         height = Integer.parseInt(PropertiesReader.get("ScreenHeight"));
-        focusButton = calendarButton;
+
         int x = 0;
         int y = Constant.TITLE_PANEL_HEIGHT;
 
@@ -82,6 +82,12 @@ public class SidePanel extends JPanel implements ActionListener {
 
         //初始化按钮
         this.initButton();
+
+        //重启焦点按钮
+        this.loadFocusButton();
+
+        //重绘
+        this.rePaint();
     }
 
     /**
@@ -109,6 +115,10 @@ public class SidePanel extends JPanel implements ActionListener {
         calendarButton = new RoundButton(calendarIcon);
         noteButton = new RoundButton(noteIcon);
 
+        //设置名字, 用于存储配置文件的最后打开页面
+        calendarButton.setName(Constant.CALENDAR);
+        noteButton.setName(Constant.NOTEBOOK);
+
         //设置背景颜色
         calendarButton.setBackground(MColor.SIDE_PANEL);
         noteButton.setBackground(MColor.SIDE_PANEL);
@@ -126,6 +136,18 @@ public class SidePanel extends JPanel implements ActionListener {
 
     }
 
+    private void loadFocusButton(){
+        String name = PropertiesReader.get("FocusButton");
+        if(name.equals(Constant.CALENDAR)) {
+            focusButton = calendarButton;
+        }
+
+        if(name.equals(Constant.NOTEBOOK)){
+            focusButton = noteButton;
+        }
+
+    }
+
     /**
      * 重绘面板的方法. 用于修改内部控件的颜色和位置啥的
      */
@@ -137,14 +159,23 @@ public class SidePanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * 日历功能按钮被点击的实现方法
+     */
     private void calendarButtonClick() {
         switchFocusButton(calendarButton);
 
+        MainFrame mf = (MainFrame) this.getRootPane().getParent();
+        mf.switchPanel(Constant.CALENDAR);
     }
 
+    /**
+     * 记事本功能按钮被点击的实现方法
+     */
     private void noteButtonClick() {
         switchFocusButton(noteButton);
-
+        MainFrame mf = (MainFrame) this.getRootPane().getParent();
+        mf.switchPanel(Constant.NOTEBOOK);
     }
 
     /**
@@ -172,6 +203,22 @@ public class SidePanel extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Before整个程序关闭之前的方法, 由主面板的关闭方法调用
+     * <p>
+     *     保存当前正在打开的窗体到配置文件中, 启动时还打开它
+     */
+    public void exit(){
+        if(focusButton != null){
+            PropertiesReader.set("FocusButton",focusButton.getName());
+
+        }
+    }
+
+    public String getFocusButtonName(){
+        return focusButton.getName();
+    }
+
 
     /**
      * 重写的源自接口的方法
@@ -194,4 +241,5 @@ public class SidePanel extends JPanel implements ActionListener {
         }
 
     }
+
 }

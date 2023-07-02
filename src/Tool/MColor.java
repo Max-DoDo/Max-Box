@@ -1,4 +1,4 @@
-package Tools;
+package Tool;
 
 import java.awt.Color;
 
@@ -69,7 +69,7 @@ public class MColor {
     }
 
     private static void darkStyle() {
-        MAIN_PANEL = LIGHT_BLACK;
+        MAIN_PANEL = new Color(100,100,100);
         TITLE_PANEL = BLACK;
         SIDE_PANEL = BLACK;
         LINE = new Color(82, 82, 82);

@@ -9,7 +9,7 @@ import GUI.MainFrame;
  * 这是面向对象一辈子的耻辱
  *  @author Maxwell
  */
-public class MyMain {
+public final class MyMain {
 
     /**
      * <p> 

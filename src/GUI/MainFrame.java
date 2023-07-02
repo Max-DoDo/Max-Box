@@ -1,8 +1,8 @@
 package GUI;
 
-import Tools.MColor;
-import Tools.PropertiesReader;
-import Tools.Tools;
+import Tool.MColor;
+import Tool.PropertiesReader;
+import Tool.Tools;
 
 import javax.swing.*;
 
@@ -17,12 +17,12 @@ import javax.swing.*;
  */
 public class MainFrame extends JFrame {
 
-    /**
-     * 程序的底层面板, 所有的其他面板都在这个面板之上
-     * 理论上来说这个面板应该会被覆盖的很惨所以没啥必要设置它的一大堆属性
-     * 这是最底层的面板
-     */
-    private JPanel basePanel;
+//    /**
+//     * 程序的底层面板, 所有的其他面板都在这个面板之上
+//     * 理论上来说这个面板应该会被覆盖的很惨所以没啥必要设置它的一大堆属性
+//     * 这是最底层的面板
+//     */
+//    private JPanel basePanel;
 
     /**
      * 标题面板. 因为Swing框架会调用系统自带的标题栏, 那个标题栏丑死了. 所以我隐藏了这个标题栏然后自己画一个新的上去
@@ -41,22 +41,20 @@ public class MainFrame extends JFrame {
      */
     private MainPanel mainPanel;
 
-    /**
-     * 存储屏幕的宽度
-     */
-    private int screenWidth;
-
-    /**
-     * 存储屏幕的高度
-     */
-    private int screenHeight;
-
+//    /**
+//     * 存储屏幕的宽度
+//     */
+//    private int screenWidth;
+//
+//    /**
+//     * 存储屏幕的高度
+//     */
+//    private int screenHeight;
 
     /**
      * UI目前是否是全屏状态. 用于TitlePanel中控制最大化按钮的行为
      */
     private boolean isFullScreen;
-
 
     /**
      * <p>
@@ -64,71 +62,6 @@ public class MainFrame extends JFrame {
      */
     public MainFrame() {
 
-        //初始化面板们
-        basePanel = (JPanel) this.getContentPane();
-        titlePanel = new TitlePanel();
-        sidePanel = new SidePanel();
-        mainPanel = new MainPanel();
-
-    }
-
-    /**
-     * <p>
-     * 用于启动程序的方法. 抄隔壁Spring的启动名称.
-     * <p>
-     * 这个方法会依次调用每一个主窗体上的控件的初始化方法来完成整个窗体的初始化
-     */
-    public void run() {
-
-        Tools.println("主窗体初始化");
-
-        //获得屏幕的宽高比
-        int[] screenSize = Tools.getScreenSize();
-
-        //初始化颜色类
-        MColor.setColorStyle(Integer.parseInt(PropertiesReader.get("ColorStyle")));
-        screenWidth = screenSize[0];
-        screenHeight = screenSize[1];
-        init();
-    }
-
-    /**
-     * 为了不让run()方法长得太胖就把它的一部分掰到这里了.
-     * <p>
-     * 这里是整个窗体初始化的最后一个本类方法... 不会再踢皮球给其他方法了
-     * <p>
-     * 然后大部分的绘制非本窗体的内容都会在这个方法中被调用.
-     */
-    private void init() {
-
-        //重绘面板的颜色
-        rePaint();
-
-        //初始化主窗体框架
-        initMainFrame();
-
-        //初始化标题面板
-        titlePanel.init();
-        this.add(titlePanel);
-
-        //初始化侧栏面板
-        sidePanel.init();
-        this.add(sidePanel);
-
-        //初始化主面板
-        mainPanel.init();
-        this.add(mainPanel);
-
-        //设置窗口可见性为可见
-        this.setVisible(true);
-
-
-    }
-
-    /**
-     * 初始化主框架的方法. 这里指的是JFrame不是它自带的那个Panel
-     */
-    private void initMainFrame() {
         this.setTitle(PropertiesReader.get("Title"));
 
         //设置退出按钮
@@ -153,17 +86,85 @@ public class MainFrame extends JFrame {
     }
 
     /**
+     * <p>
+     * 用于启动程序的方法. 抄隔壁Spring的启动名称.
+     * <p>
+     * 这个方法会依次调用每一个主窗体上的控件的初始化方法来完成整个窗体的初始化
+     */
+    public void run() {
+
+        Tools.println("主窗体初始化");
+
+        //获得屏幕的宽高比
+        int[] screenSize = Tools.getScreenSize();
+
+        //写入配置文件
+        PropertiesReader.set("ScreenWidth",String.valueOf(screenSize[0]));
+        PropertiesReader.set("ScreenHeight", String.valueOf(screenSize[1]));
+
+        //初始化颜色类
+        MColor.setColorStyle(Integer.parseInt(PropertiesReader.get("ColorStyle")));
+
+        init();
+    }
+
+    /**
+     * 为了不让run()方法长得太胖就把它的一部分掰到这里了.
+     * <p>
+     * 这里是整个窗体初始化的最后一个本类方法... 不会再踢皮球给其他方法了
+     * <p>
+     * 然后大部分的绘制非本窗体的内容都会在这个方法中被调用.
+     */
+    private void init() {
+
+        //初始化面板们
+        titlePanel = new TitlePanel();
+        sidePanel = new SidePanel();
+        mainPanel = new MainPanel();
+
+        //重绘面板的颜色
+//        rePaint();
+
+        //初始化标题面板
+        titlePanel.init();
+        this.add(titlePanel);
+
+        //初始化侧栏面板
+        sidePanel.init();
+        this.add(sidePanel);
+
+        //初始化主面板
+        mainPanel.init();
+        this.add(mainPanel);
+
+        this.loadData();
+
+        //设置窗口可见性为可见
+        this.setVisible(true);
+
+
+    }
+
+    /**
+     * 从配置文件和数据中加载
+     */
+    private void loadData(){
+        loadCard();
+    }
+
+    private void loadCard(){
+
+        String name = sidePanel.getFocusButtonName();
+        this.switchPanel(name);
+    }
+
+    /**
      * 对UI界面上色
      * <p>
      * 从配置文件中调用UI的主题类型来获得不同的颜色集
      */
     private void rePaint() {
         //设置UI配色
-
-        basePanel.setBackground(MColor.MAIN_PANEL);
-        titlePanel.setBackground(MColor.SIDE_PANEL);
-        sidePanel.setBackground(MColor.SIDE_PANEL);
-        mainPanel.setBackground(MColor.MAIN_PANEL);
 
     }
 
@@ -195,10 +196,20 @@ public class MainFrame extends JFrame {
      * </p>
      */
     public void rePaintAll() {
-        this.rePaint();
+//        this.rePaint();
         titlePanel.rePaint();
         sidePanel.rePaint();
         mainPanel.rePaint();
+    }
+
+    /**
+     * 超级难看的方法. 用来让这个窗体中的子类控件MainPanel切换显示
+     * 一人提高了耦合度
+     * @param panelName 组件的名字
+     * @see Tool.Constant
+     */
+    public void switchPanel(String panelName){
+        mainPanel.switchPanel(panelName);
     }
 
     /**
@@ -206,10 +217,14 @@ public class MainFrame extends JFrame {
      */
     public void exit() {
         Tools.println("退出程序");
+
+        sidePanel.exit();
+
         System.exit(0);
     }
 
     public boolean isFullScreen() {
         return isFullScreen;
     }
+
 }

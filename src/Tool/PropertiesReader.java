@@ -1,4 +1,4 @@
-package Tools;
+package Tool;
 
 import java.io.*;
 import java.util.Properties;

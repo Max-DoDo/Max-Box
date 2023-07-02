@@ -1,4 +1,4 @@
-package Tools;
+package Tool;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
@@ -131,14 +131,10 @@ public class Tools {
     public static int[] getScreenSize(){
         //获得当前屏幕的宽度和高度
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        PropertiesReader ppt = new PropertiesReader();
 
         int[] value = new int[2];
         value[0] = (int)screenSize.getWidth();
         value[1] = (int)screenSize.getHeight();
-
-        PropertiesReader.set("ScreenWidth",String.valueOf(value[0]));
-        PropertiesReader.set("ScreenHeight", String.valueOf(value[1]));
 
         return value;
     }
