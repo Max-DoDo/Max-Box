@@ -9,7 +9,9 @@ import javax.swing.*;
 
 /**
  * <p>
- * GUI类的主类, 本类对象构造了程序的主窗口
+ * GUI类的主类, 本类对象构造了程序的主窗口.
+ * <p>
+ * 实例化这个类的对象会创建一个本项目的窗体. 因此本类可以被称之为"所有项目UI控件的Root"之类的样子
  *
  * @author Maxwell
  */
@@ -39,21 +41,28 @@ public class MainFrame extends JFrame {
      */
     private JPanel mainPanel;
 
+    /**
+     * 存储屏幕的宽度
+     */
     private int screenWidth;
 
+    /**
+     * 存储屏幕的高度
+     */
     private int screenHeight;
 
+
+    /**
+     * UI目前是否是全屏状态. 用于TitlePanel中控制最大化按钮的行为
+     */
     private boolean isFullScreen;
 
 
     /**
      * <p>
-     * 无参构造函数
+     * 无参构造函数. 初始化一些简单的玩意
      */
     public MainFrame() {
-
-        //初始化成员变量
-
 
         //初始化面板们
         basePanel = (JPanel) this.getContentPane();
@@ -65,7 +74,9 @@ public class MainFrame extends JFrame {
 
     /**
      * <p>
-     * 用于启动程序的方法
+     * 用于启动程序的方法. 抄隔壁Spring的启动名称.
+     * <p>
+     * 这个方法会依次调用每一个主窗体上的控件的初始化方法来完成整个窗体的初始化
      */
     public void run() {
 
@@ -79,6 +90,13 @@ public class MainFrame extends JFrame {
         init();
     }
 
+    /**
+     * 为了不让run()方法长得太胖就把它的一部分掰到这里了.
+     * <p>
+     * 这里是整个窗体初始化的最后一个本类方法... 不会再踢皮球给其他方法了
+     * <p>
+     * 然后大部分的绘制非本窗体的内容都会在这个方法中被调用.
+     */
     private void init() {
 
         //重绘面板的颜色
@@ -97,6 +115,9 @@ public class MainFrame extends JFrame {
 
     }
 
+    /**
+     * 初始化主框架的方法. 这里指的是JFrame不是它自带的那个Panel
+     */
     private void initMainFrame() {
         this.setTitle(PropertiesReader.get("Title"));
 
@@ -106,7 +127,8 @@ public class MainFrame extends JFrame {
         //窗体总是在最前端
 //        this.setAlwaysOnTop(true);
 
-        this.setBounds(0, 0, 400, 1100);
+        //设置非全屏时的窗体大小
+        this.setBounds(0, 0, 300, 1100);
 
         //最大化
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -136,7 +158,9 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * 设置
+     * 让子窗体回调用的函数, 用来调整窗口的大小.
+     * @param state 设置窗体状态的常量
+     * @see JFrame#NORMAL
      */
     public void reState(int state) {
         this.setExtendedState(state);
@@ -161,7 +185,7 @@ public class MainFrame extends JFrame {
      * </p>
      */
     public void resizeAll() {
-        titlePanel.reSize();
+        titlePanel.rePaint();
     }
 
     /**

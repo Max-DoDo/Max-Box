@@ -2,7 +2,6 @@ package GUI;
 
 import Tools.MColor;
 import Tools.PropertiesReader;
-import Tools.Tools;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +16,7 @@ import java.awt.event.MouseListener;
  *
  * </p>
  */
-public class TitlePanel extends JPanel implements ActionListener,MouseListener {
+public class TitlePanel extends JPanel implements ActionListener, MouseListener {
 
     /**
      * 标题图标
@@ -48,12 +47,18 @@ public class TitlePanel extends JPanel implements ActionListener,MouseListener {
     /**
      * 切换大小按钮
      */
-    private JButton reSizeButton;
+    private JButton resizeButton;
+
+    private ImageIcon resizeIcon;
+    private ImageIcon resizeIcon2;
 
     /**
      * 关闭按钮
      */
     private JButton exitButton;
+
+    private ImageIcon exitIcon;
+    private ImageIcon exitIcon2;
 
     /**
      * 设置按钮
@@ -81,51 +86,23 @@ public class TitlePanel extends JPanel implements ActionListener,MouseListener {
         titlePanelWidth = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
         titlePanelHeight = 46;
         this.setSize(titlePanelWidth, titlePanelHeight);
-
         this.setLayout(null);
+
         this.initIcon();
         this.initButton();
         this.initIconMenu();
+        this.initSettingButton();
     }
 
     /**
-     * 重新设置控件的大小和位置
+     * 初始化最左边logo按钮的相关设置
      */
-    public void reSize() {
-
-        //本体的相关设置
-        titlePanelWidth = this.getRootPane().getParent().getWidth();
-        titlePanelHeight = 46;
-        this.setSize(titlePanelWidth, titlePanelHeight);
-
-        //老三样的设置
-        int width = this.getHeight() + 10;
-        int oriX = this.getWidth() - (3 * width);
-        int y = 0;
-        closeButton.setLocation(oriX, y);
-        reSizeButton.setLocation(oriX + width, y);
-        exitButton.setLocation(oriX + (width * 2), y);
-
-    }
-
-    public void reColor() {
-
-        reColorButton();
-    }
-
-    private void reColorButton() {
-
-        closeButton.setBackground(MColor.SIDE_PANEL);
-        reSizeButton.setBackground(MColor.SIDE_PANEL);
-        exitButton.setBackground(MColor.SIDE_PANEL);
-    }
-
     private void initIcon() {
 
         Icon icon = new ImageIcon(".\\resource\\titleIcon.png");
 
         titleIcon = new JButton(icon);
-        titleIcon.setLocation(0, 5);
+        titleIcon.setLocation(10, 7);
         titleIcon.setSize(30, 30);
 
         //去掉按钮内部颜色填充
@@ -145,58 +122,59 @@ public class TitlePanel extends JPanel implements ActionListener,MouseListener {
      */
     private void initButton() {
 
-        //他们的高度和宽度是一样的
+        //三个按钮 的高度和宽度是一样的
         int width = this.getHeight() + 10;
         int height = this.getHeight();
         int oriX = this.getWidth() - (3 * width);
         int y = 0;
 
-        //设置他们的图标
+        resizeIcon = new ImageIcon(".\\resource\\resizeIcon.png");
+        resizeIcon2 = new ImageIcon(".\\resource\\resizeIcon2.png");
+        exitIcon = new ImageIcon(".\\resource\\exitIcon.png");
+        exitIcon2 = new ImageIcon(".\\resource\\exitIcon2.png");
+
+        //设置图标
         Icon Icon = new ImageIcon(".\\resource\\closeIcon.png");
         closeButton = new JButton(Icon);
+        resizeButton = new JButton(resizeIcon);
+        exitButton = new JButton(exitIcon);
 
-        Icon = new ImageIcon(".\\resource\\resizeIcon.png");
-        reSizeButton = new JButton(Icon);
-
-        Icon = new ImageIcon(".\\resource\\exitIcon.png");
-        exitButton = new JButton(Icon);
-
-        //设置他们的大小
+        //设置大小
         closeButton.setSize(width, height);
-        reSizeButton.setSize(width,height);
-        exitButton.setSize(width,height);
+        resizeButton.setSize(width, height);
+        exitButton.setSize(width, height);
 
-        //设置他们的背景颜色
+        //设置背景颜色
         closeButton.setBackground(MColor.SIDE_PANEL);
-        reSizeButton.setBackground(MColor.SIDE_PANEL);
+        resizeButton.setBackground(MColor.SIDE_PANEL);
         exitButton.setBackground(MColor.SIDE_PANEL);
 
-        //设置他们的位置
+        //设置位置
         closeButton.setLocation(oriX, y);
-        reSizeButton.setLocation(oriX + width, y);
+        resizeButton.setLocation(oriX + width, y);
         exitButton.setLocation(oriX + (width * 2), y);
 
 
         //去掉按钮边框和焦点边框
         closeButton.setBorderPainted(false);
         closeButton.setFocusPainted(false);
-        reSizeButton.setBorderPainted(false);
-        reSizeButton.setFocusPainted(false);
+        resizeButton.setBorderPainted(false);
+        resizeButton.setFocusPainted(false);
         exitButton.setBorderPainted(false);
         exitButton.setFocusPainted(false);
 
-        //设置监听
+        //设置监听, 按键监听和鼠标移动的监听
         closeButton.addActionListener(this);
         closeButton.addMouseListener(this);
-        reSizeButton.addActionListener(this);
-        reSizeButton.addMouseListener(this);
+        resizeButton.addActionListener(this);
+        resizeButton.addMouseListener(this);
         exitButton.addActionListener(this);
         exitButton.addMouseListener(this);
 
+        //加到标题面板上
         this.add(closeButton);
-        this.add(reSizeButton);
+        this.add(resizeButton);
         this.add(exitButton);
-
 
 
     }
@@ -218,16 +196,156 @@ public class TitlePanel extends JPanel implements ActionListener,MouseListener {
             titleIconMenu.add(menuItems[i]);
         }
 
+        //还原按钮有些麻烦而且没啥用处, 暂时先不使用了
+        menuItems[0].setEnabled(false);
+    }
+
+
+    /**
+     * 初始化设置按钮
+     */
+    private void initSettingButton() {
+
+        int width = this.getHeight();
+        int height = this.getHeight();
+
+        //初始化和设置图标
+        settingButton = new JButton(new ImageIcon(".\\resource\\settingIcon.png"));
+
+        //设置背景颜色
+        settingButton.setBackground(MColor.SIDE_PANEL);
+
+        //去掉焦点和边框
+        settingButton.setBorderPainted(false);
+        settingButton.setFocusPainted(false);
+
+        //设置长和宽
+        settingButton.setSize(width,height);
+
+        //设置位置
+        settingButton.setLocation(closeButton.getX() - width,0);
+
+        //设置监听
+        settingButton.addActionListener(this);
+
+        this.add(settingButton);
+    }
+
+    /**
+     * 重绘该面板的所有颜色属性
+     */
+
+    public void rePaint() {
+
+        rePaintSelf();
+        rePaintButton();
+    }
+
+    /**
+     * 重新设置控件的大小和位置
+     */
+    public void rePaintSelf() {
+
+        //本体的相关设置
+        titlePanelWidth = this.getRootPane().getParent().getWidth();
+        this.setSize(titlePanelWidth, titlePanelHeight);
 
     }
 
     /**
-     *
+     * 重绘老三样的颜色,位置, 修改大小按钮的图标
+     */
+    private void rePaintButton() {
+
+
+        //设置背景颜色
+        closeButton.setBackground(MColor.SIDE_PANEL);
+        resizeButton.setBackground(MColor.SIDE_PANEL);
+        exitButton.setBackground(MColor.SIDE_PANEL);
+
+        //计算位置
+        int width = this.getHeight() + 10;
+        int oriX = this.getWidth() - (3 * width);
+        int y = 0;
+
+        //设置位置
+        closeButton.setLocation(oriX, y);
+        resizeButton.setLocation(oriX + width, y);
+        exitButton.setLocation(oriX + (width * 2), y);
+        settingButton.setLocation(oriX - width + 10,y);
+
+        //重绘修改大小按钮的图标
+        MainFrame mf = (MainFrame) this.getRootPane().getParent();
+        if (mf.isFullScreen()) {
+            resizeButton.setIcon(resizeIcon);
+        } else {
+            resizeButton.setIcon(resizeIcon2);
+        }
+
+        //重绘退出按钮的图标
+        exitButton.setIcon(exitIcon);
+    }
+
+    /**
+     * 打开弹出菜单栏
      */
     private void showTitleMenu() {
 
         titleIconMenu.show(titleIcon, titleIcon.getWidth(), titleIcon.getHeight());
     }
+
+    /**
+     * 最小化窗体按钮的实现
+     */
+    private void closeButton() {
+
+        MainFrame mf = (MainFrame) this.getRootPane().getParent();
+        /*
+         * 根据查阅到的资料, 在swing的窗体的用于ExtendedState常量中, 用二进制位来表示不同的情况.
+         * 其中个位为0表示窗体打开, 1为关闭
+         * 因此直接操作这个值 + 1就可以达到最小化的情况.
+         * 另外因为最小化后用户一般情况下(至少我没发现)是不能再次单击这个按钮的. 而当用户通过点击应用的图标或者切屏啥的给切回来的时候
+         * 这个加上的1因为状态的改变已经被swing自己减去了. 因此目前这样就很完美.
+         * (之后遇到bug了再说)
+         */
+        mf.reState(mf.getExtendedState() + 1);
+    }
+
+    /**
+     * 调整窗口大小按钮的实现
+     */
+    private void reSizeButton() {
+
+        //获得主框架的引用
+        MainFrame mf = (MainFrame) this.getRootPane().getParent();
+
+        if(mf.isFullScreen()){
+            mf.reState(JFrame.NORMAL);
+        }else{
+            mf.reState(JFrame.MAXIMIZED_BOTH);
+        }
+
+        rePaint();
+    }
+
+    /**
+     * 退出按钮的单击事件相应方法.
+     * <p>
+     *     把皮球踢给主框架那边让它处理和退出相关的事情
+     */
+    private void exitButton(){
+        MainFrame mf = (MainFrame) this.getRootPane().getParent();
+        mf.exit();
+    }
+
+    /**
+     * 设置按钮的单击事件相应方法
+     */
+    private void settingButton(){
+
+    }
+
+//    下面是源自接口的重写方法
 
     /**
      * 重写源自接口的方法来实现对控件的监听
@@ -240,107 +358,101 @@ public class TitlePanel extends JPanel implements ActionListener,MouseListener {
         Object source = e.getSource();
         String name = e.getActionCommand();
 
+        //标题logo
         if (source.equals(titleIcon)) {
             showTitleMenu();
             return;
         }
 
-        if(source.equals(reSizeButton)){
-            MainFrame mf = (MainFrame) this.getRootPane().getParent();
-            if(mf.isFullScreen()){
-                reSizeButton.setIcon(new ImageIcon(".\\resource\\resizeIcon2.png"));
-                mf.reState(JFrame.NORMAL);
-            }else{
-                reSizeButton.setIcon(new ImageIcon(".\\resource\\resizeIcon.png"));
-                mf.reState(JFrame.MAXIMIZED_BOTH);
-            }
-
+        //修改大小按钮
+        if (source.equals(resizeButton)) {
+            reSizeButton();
             return;
         }
 
-        if (name.equals(menuItemName[0])) {
-            Tools.println("标题图标下拉菜单按钮:'还原'被单击");
-            MainFrame mf = (MainFrame) this.getRootPane().getParent();
-            mf.reState(JFrame.NORMAL);
-
-            if(mf.isFullScreen()){
-                reSizeButton.setIcon(new ImageIcon(".\\resource\\resizeIcon.png"));
-            }else{
-                reSizeButton.setIcon(new ImageIcon(".\\resource\\resizeIcon2.png"));
-            }
-            return;
-        }
-
+        //最小化按钮和弹出菜单最小化选项
         if (name.equals(menuItemName[1]) || source.equals(closeButton)) {
-            Tools.println("'最小化'按钮被单击");
-            MainFrame mf = (MainFrame) this.getRootPane().getParent();
-            int state = mf.getExtendedState();
-            Tools.println(state);
-            mf.reState(7);
+            closeButton();
             return;
         }
 
+        //弹出菜单最大化按钮
         if (name.equals(menuItemName[2])) {
-            Tools.println("'最大化'按钮被单击");
             MainFrame mf = (MainFrame) this.getRootPane().getParent();
             mf.reState(JFrame.MAXIMIZED_BOTH);
-
-            if(mf.isFullScreen()){
-                reSizeButton.setIcon(new ImageIcon(".\\resource\\resizeIcon2.png"));
-            }else{
-                reSizeButton.setIcon(new ImageIcon(".\\resource\\resizeIcon.png"));
-            }
+            rePaint();
             return;
         }
 
-        if (name.equals(menuItemName[3])|| source.equals(exitButton)) {
-            Tools.println("'关闭'按钮被单击");
-            MainFrame mf = (MainFrame) this.getRootPane().getParent();
-            mf.exit();
+        //弹出菜单退出选项和退出按钮
+        if (name.equals(menuItemName[3]) || source.equals(exitButton)) {
+            exitButton();
+            return;
+        }
+
+        if(source.equals(settingButton)){
+            settingButton();
             return;
         }
 
 
     }
 
+    /**
+     * 重写源自接口的方法
+     * <p>
+     * 在这个方法中主要负责监听老三样的鼠标进入事件, 当鼠标进入组件中时切换颜色或者切换icon
+     * </p>
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         Component component = e.getComponent();
 
-        if(component.equals(closeButton)){
+        if (component.equals(closeButton)) {
             closeButton.setBackground(MColor.DARK_WHITE);
             return;
         }
 
-        if(component.equals(reSizeButton)){
-            reSizeButton.setBackground(MColor.DARK_WHITE);
+        if (component.equals(resizeButton)) {
+            resizeButton.setBackground(MColor.DARK_WHITE);
             return;
         }
 
-        if(component.equals(exitButton)){
+        if (component.equals(exitButton)) {
             exitButton.setBackground(MColor.RED);
+            exitButton.setIcon(exitIcon2);
             return;
         }
 
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
+    /**
+     * 对鼠标点下去的事件进行监听的主要目的是重绘退出按钮
+     * <p>
+     *     正常情况下操作一个退出按钮的流程是:
+     *     鼠标拖到它身上->按钮变红->鼠标点下去->按钮回复原样->鼠标松开->执行关闭的操作
+     * <p>
+     *     事实上每个按钮都应该在鼠标点下去的时候拥有另外一个icon. 但是实际情况是swing拥有自己的一个点击动画
+     *     而且勉勉强强不算丑, 可以看得过去. 因此只需要把这个按钮X号附近发红的边框给换成原先灰色的样子就好了
+     * <p>
+     *     感觉为了一点无关紧要的小事增加了很多开销呢...算了反正我也用不完
+     * @param e the event to be processed
+     */
     @Override
     public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
+        exitButton.setIcon(exitIcon);
+//        rePaintButton();
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-            reColorButton();
+        rePaintButton();
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
 }
