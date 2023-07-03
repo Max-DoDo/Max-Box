@@ -1,4 +1,4 @@
-package pro;
+package pro.base;
 
 import tools.Constant;
 import tools.MColor;
@@ -314,6 +314,12 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
          * (之后遇到bug了再说)
          */
         mf.reState(mf.getExtendedState() + 1);
+
+        //玄学操作
+        mf.setVisible(false);
+        mf.setVisible(true);
+
+        mf.repaint();
     }
 
     /**

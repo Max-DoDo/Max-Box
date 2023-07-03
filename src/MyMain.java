@@ -1,6 +1,4 @@
-
-
-import pro.MainFrame;
+import pro.base.MainFrame;
 
 /**
  * <p> 
@@ -25,5 +23,4 @@ public final class MyMain {
         new MainFrame().run();
     }
 
-    
 }

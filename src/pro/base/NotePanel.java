@@ -1,4 +1,4 @@
-package pro;
+package pro.base;
 
 import javax.swing.*;
 import java.awt.*;

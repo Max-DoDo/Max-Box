@@ -69,7 +69,7 @@ public class MColor {
     /**
      * 按钮颜色
      */
-    public static Color BUTTON_NORMAL;
+    public static Color SPC_BUTTON_NORMAL;
 
     /**
      * 按钮选中颜色
@@ -80,6 +80,21 @@ public class MColor {
      * 按钮点击时颜色
      */
     public static Color BUTTON_PRESSING;
+
+    /**
+     * 本月的日历按钮颜色
+     */
+    public static Color CAL_BUTTON_ENABLE;
+
+    /**
+     * 非本月按钮颜色
+     */
+    public static Color CAL_BUTTON_DISABLE;
+
+    /**
+     * 字体颜色
+     */
+    public static Color FONT;
 
 
     /**
@@ -98,24 +113,34 @@ public class MColor {
     }
 
     private static void darkStyle() {
+        LINE = new Color(82, 82, 82);
+        FONT = new Color(214,214,214);
+
         MAIN_PANEL = new Color(100,100,100);
         TITLE_PANEL = BLACK;
         SIDE_PANEL = BLACK;
-        LINE = new Color(82, 82, 82);
-        BUTTON_NORMAL = new Color(71, 158, 245);
+        SPC_BUTTON_NORMAL = new Color(71, 158, 245);
         BUTTON_SELECTING = Color.BLACK;
         BUTTON_PRESSING = new Color(8, 35, 56);
+
+        CAL_BUTTON_ENABLE = new Color(41,41,41);
+        CAL_BUTTON_DISABLE = new Color(31,31,31);
 
     }
 
     private static void lightStyle() {
+        LINE = new Color(224, 224, 224);
+        FONT = new Color(66,66,66);
+
         MAIN_PANEL = DARK_WHITE;
         TITLE_PANEL = GHOST_WHITE;
         SIDE_PANEL = GHOST_WHITE;
-        LINE = new Color(224, 224, 224);
-        BUTTON_NORMAL = new Color(15, 108, 189);
+        SPC_BUTTON_NORMAL = new Color(15, 108, 189);
         BUTTON_SELECTING = new Color(235, 235, 235);
         BUTTON_PRESSING = new Color(207, 228, 250);
+
+        CAL_BUTTON_ENABLE = new Color(255,255,255);
+        CAL_BUTTON_DISABLE = new Color(250,250,250);
 
     }
 

@@ -25,7 +25,7 @@ public class Tools {
      * </p><p>
      * 用于替换<code>System.out.println()</code>方法
      * </p><p>
-     * 这个方法的时间戳的实现本质上是创建和调用了<code>Calendar</code>类的对象
+     * 这个方法的时间戳的实现本质上是创建和调用了<code>MCalendar</code>类的对象
      * 有很多优化空间, 例如使用<code>format()</code>方法来获得该类对象的事件内容
      * </p>
      * @see java.util.Calendar
@@ -147,6 +147,16 @@ public class Tools {
      */
     public static boolean in(Object[] array,Object obj){
         return Arrays.asList(array).contains(obj);
+    }
+
+    public static String format_D(int day){
+        return day + "日";
+
+    }
+
+    public static String format_MD(int month, int day){
+        return month + "月" + day + "日";
+
     }
 
 

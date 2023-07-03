@@ -1,6 +1,6 @@
-package pro;
+package pro.base;
 
-import pro.calendar.CalendarPanel;
+import pro.calendar.ui.CalendarPanel;
 import tools.Constant;
 import tools.MColor;
 import tools.PropertiesReader;
@@ -28,9 +28,9 @@ public class MainPanel extends JPanel {
 
     private CardLayout card;
 
-    int width;
+    private int width;
 
-    int height;
+    private int height;
 
 
     /**
@@ -43,6 +43,10 @@ public class MainPanel extends JPanel {
         int y = Constant.TITLE_PANEL_HEIGHT;
         width = Integer.parseInt(PropertiesReader.get("ScreenWidth")) - x;
         height = Integer.parseInt(PropertiesReader.get("ScreenHeight")) - y;
+
+        //把自己的大小写到配置文件中. 这就是所有后续主窗体的真正大小
+        PropertiesReader.set("MainPanelWidth",String.valueOf(width));
+        PropertiesReader.set("MainPanelHeight",String.valueOf(height));
 
 
         // 给内部成员变量点值. 设置它们的名字用来让卡片布局管理器调用
