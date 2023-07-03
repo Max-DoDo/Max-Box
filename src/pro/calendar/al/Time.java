@@ -50,5 +50,9 @@ public class Time {
         return this.month;
     }
 
+    public int getYear(){
+        return this.year;
+    }
+
 
 }

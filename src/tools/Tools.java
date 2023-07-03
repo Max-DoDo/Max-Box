@@ -150,13 +150,21 @@ public class Tools {
     }
 
     public static String format_D(int day){
-        return day + "日";
+        return addSpace(day + " 日 ");
 
     }
 
     public static String format_MD(int month, int day){
-        return month + "月" + day + "日";
+        return addSpace(month + " 月 " + day + " 日 ");
 
+    }
+
+    public static String format_YMD(int year, int month, int day){
+        return addSpace(year + " 年 " + month + " 月 " + day  + " 日 ");
+    }
+
+    private static String addSpace(String str){
+        return "    " + str;
     }
 
 

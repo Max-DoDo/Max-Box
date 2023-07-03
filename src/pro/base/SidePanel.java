@@ -5,6 +5,7 @@ import tools.MColor;
 import tools.PropertiesReader;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -155,7 +156,7 @@ public class SidePanel extends JPanel implements ActionListener {
         this.setBackground(MColor.SIDE_PANEL);
 
         if(focusButton != null){
-            focusButton.setBackground(MColor.GRAY);
+            focusButton.setBackground(Color.GRAY);
         }
     }
 
@@ -188,7 +189,7 @@ public class SidePanel extends JPanel implements ActionListener {
         if (focusButton == null) {
 
             focusButton = jb;
-            focusButton.setBackground(MColor.GRAY);
+            focusButton.setBackground(Color.GRAY);
 
         } else if (focusButton.equals(jb)) {
 
@@ -197,7 +198,7 @@ public class SidePanel extends JPanel implements ActionListener {
         } else {
 
             focusButton.setBackground(MColor.SIDE_PANEL);
-            jb.setBackground(MColor.GRAY);
+            jb.setBackground(Color.GRAY);
             focusButton = jb;
 
         }

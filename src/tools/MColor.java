@@ -14,37 +14,17 @@ public class MColor {
     public static final int DARK_STYLE = 1;
     public static final int USER_DEFINE_STYLE = -1;
 
-    public final static Color BLACK = new Color(10, 10, 10);
-    public final static Color LIGHT_BLACK = new Color(31, 31, 31);
-
-    public final static Color DARK_GRAY = new Color(100, 100, 100);
-    public final static Color GRAY = new Color(167, 171, 175);
-    public final static Color LIGHT_GRAY = new Color(200, 200, 200);
-
-    public final static Color GHOST_WHITE = new Color(240, 240, 240);
-    public final static Color WHITE = new Color(255, 255, 255);
-    public final static Color DARK_WHITE = new Color(250, 250, 250);
-
-    public final static Color GREEN = new Color(82, 196, 26);
-    public final static Color LIGHT_GREEN = new Color(183, 235, 143);
-    public final static Color WHITE_GREEN = new Color(246, 255, 237);
-
-    public final static Color ORANGE = new Color(250, 173, 20);
-    public final static Color LIGHT_ORANGE = new Color(255, 229, 143);
-    public final static Color WHITE_ORANGE = new Color(255, 251, 230);
-
-    public final static Color RED = new Color(232, 17, 35);
-    public final static Color LIGHT_RED = new Color(255, 163, 158);
-    public final static Color WHITE_RED = new Color(255, 241, 240);
-
-    public final static Color BLUE = new Color(24, 144, 255);
-    public final static Color LIGHT_BLUE = new Color(145, 213, 255);
-    public final static Color WHITE_BLUE = new Color(230, 247, 255);
-
     /**
      * 存储当前的颜色模式
      */
     public static int colorStyle;
+
+//===========================================================================
+
+    /**
+     * 分割线颜色
+     */
+    public static Color LINE;
 
     /**
      * 主面板颜色
@@ -62,34 +42,46 @@ public class MColor {
     public static Color SIDE_PANEL;
 
     /**
-     * 分割线颜色
-     */
-    public static Color LINE;
-
-    /**
-     * 按钮颜色
+     * 重要按钮颜色
      */
     public static Color SPC_BUTTON_NORMAL;
 
     /**
-     * 按钮选中颜色
+     * 普通按钮选中颜色
      */
     public static Color BUTTON_SELECTING;
 
     /**
-     * 按钮点击时颜色
+     * 普通按钮点击时颜色
      */
     public static Color BUTTON_PRESSING;
 
     /**
-     * 本月的日历按钮颜色
+     * 今天及以后日期格子正常颜色
      */
-    public static Color CAL_BUTTON_ENABLE;
+    public static Color CB_FUTURE;
 
     /**
-     * 非本月按钮颜色
+     * 今天以前日期格子正常颜色
      */
-    public static Color CAL_BUTTON_DISABLE;
+    public static Color CB_PASSED;
+
+    /**
+     * 被选择的日期格子颜色
+     */
+    public static Color CB_S;
+
+    /**
+     * 正在点击的今天及以后日期格子颜色
+     */
+    public static Color CB_FUTURE_P;
+
+    /**
+     * 正在点击的今天之前的日期格子颜色
+     */
+    public static Color CB_PASSED_P;
+
+    public static Color CB_HIGHLIGHT;
 
     /**
      * 字体颜色
@@ -114,33 +106,48 @@ public class MColor {
 
     private static void darkStyle() {
         LINE = new Color(82, 82, 82);
-        FONT = new Color(214,214,214);
+        FONT = new Color(214, 214, 214);
 
-        MAIN_PANEL = new Color(100,100,100);
-        TITLE_PANEL = BLACK;
-        SIDE_PANEL = BLACK;
+        MAIN_PANEL = new Color(100, 100, 100);
+        TITLE_PANEL = new Color(10, 10, 10);
+        SIDE_PANEL = new Color(10, 10, 10);
+
         SPC_BUTTON_NORMAL = new Color(71, 158, 245);
-        BUTTON_SELECTING = Color.BLACK;
+        BUTTON_SELECTING = new Color(46, 46, 46);
         BUTTON_PRESSING = new Color(8, 35, 56);
 
-        CAL_BUTTON_ENABLE = new Color(41,41,41);
-        CAL_BUTTON_DISABLE = new Color(31,31,31);
+        //日历
+        CB_FUTURE = new Color(41, 41, 41);
+        CB_PASSED = new Color(31, 31, 31);
 
+        CB_S = new Color(8, 35, 56);
+        CB_FUTURE_P = new Color(61, 61, 61);
+        CB_PASSED_P = new Color(0, 0, 0);
+
+        CB_HIGHLIGHT = new Color(71, 158, 245);
     }
 
     private static void lightStyle() {
         LINE = new Color(224, 224, 224);
         FONT = new Color(66,66,66);
 
-        MAIN_PANEL = DARK_WHITE;
-        TITLE_PANEL = GHOST_WHITE;
-        SIDE_PANEL = GHOST_WHITE;
+        MAIN_PANEL = new Color(250, 250, 250);
+        TITLE_PANEL = new Color(240, 240, 240);
+        SIDE_PANEL = new Color(240, 240, 240);
+
         SPC_BUTTON_NORMAL = new Color(15, 108, 189);
         BUTTON_SELECTING = new Color(235, 235, 235);
         BUTTON_PRESSING = new Color(207, 228, 250);
 
-        CAL_BUTTON_ENABLE = new Color(255,255,255);
-        CAL_BUTTON_DISABLE = new Color(250,250,250);
+        //日历
+        CB_FUTURE = new Color(255,255,255);
+        CB_PASSED = new Color(250,250,250);
+
+        CB_S = new Color(207, 228, 250);
+        CB_FUTURE_P = new Color(240, 240, 240);
+        CB_PASSED_P = new Color(235, 235, 235);
+
+        CB_HIGHLIGHT = new Color(15, 108, 189);
 
     }
 

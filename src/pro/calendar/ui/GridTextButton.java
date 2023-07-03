@@ -24,26 +24,30 @@ public class GridTextButton extends JButton implements MouseListener {
     /**
      * 本控件所在父类控件
      */
-    DateGrid father;
+    private DateGrid father;
 
     /**
      * 这个标签是否显示月份
      */
-    boolean isShowMonth;
+    private boolean isShowMonth;
+
+
+    /**
+     * 这个标签是否显示年份
+     */
+    private boolean isShowYear;
 
     /**
      * 本类对象所代表的时间
      */
-    Time time;
+    private Time time;
 
 
-    public GridTextButton(DateGrid father, Time time, boolean isShowMonth){
+    public GridTextButton(DateGrid father, Time time){
 
         this.father = father;
 
         this.time = time;
-
-        this.isShowMonth = isShowMonth;
 
         //设置字体靠左
         this.setHorizontalAlignment(JButton.LEFT);
@@ -61,17 +65,24 @@ public class GridTextButton extends JButton implements MouseListener {
     }
 
 
-    public void setText(){
+    private void setText(){
 
         if(time == null){
             return;
         }
 
+        if(isShowYear){
+            this.setText(Tools.format_YMD(time.getYear(),time.getMonth(),time.getDay()));
+            return;
+        }
+
         if(isShowMonth){
             this.setText(Tools.format_MD(time.getMonth(),time.getDay()));
-        }else{
-            this.setText(Tools.format_D(time.getDay()));
+            return;
         }
+
+        this.setText(Tools.format_D(time.getDay()));
+
     }
 
     public void setTime(Time time){
@@ -79,14 +90,6 @@ public class GridTextButton extends JButton implements MouseListener {
         this.setText();
     }
 
-    /**
-     * 是否显示月份, 这会同步更新UI上的内容显示
-     * @param isShowMonth true: 显示月份 false: 不显示月份
-     */
-    public void setShowMonth(boolean isShowMonth){
-        this.isShowMonth = isShowMonth;
-        this.setText();
-    }
 
     @Override
     public String toString() {
@@ -122,4 +125,27 @@ public class GridTextButton extends JButton implements MouseListener {
     public void mouseExited(MouseEvent e) {
         father.mouseExited(e);
     }
+
+    /**
+     * 是否显示月份, 这会同步更新UI上的内容显示
+     * @param isShowMonth true: 显示月份 false: 不显示月份
+     */
+    public void setShowMonth(boolean isShowMonth){
+        this.isShowMonth = isShowMonth;
+        this.setText();
+    }
+
+    public boolean isShowMonth() {
+        return isShowMonth;
+    }
+
+    public boolean isShowYear() {
+        return isShowYear;
+    }
+
+    public void setShowYear(boolean showYear) {
+        isShowYear = showYear;
+        this.setText();
+    }
+
 }

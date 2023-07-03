@@ -422,23 +422,23 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
         Component component = e.getComponent();
 
         if (component.equals(closeButton)) {
-            closeButton.setBackground(MColor.DARK_WHITE);
+                closeButton.setBackground(MColor.BUTTON_SELECTING);
             return;
         }
 
         if (component.equals(resizeButton)) {
-            resizeButton.setBackground(MColor.DARK_WHITE);
+            resizeButton.setBackground(MColor.BUTTON_SELECTING);
             return;
         }
 
         if (component.equals(exitButton)) {
-            exitButton.setBackground(MColor.RED);
+            exitButton.setBackground(new Color(232,17,35));
             exitButton.setIcon(exitIcon2);
             return;
         }
 
         if(component.equals(settingButton)){
-            settingButton.setBackground(MColor.DARK_WHITE);
+            settingButton.setBackground(MColor.BUTTON_SELECTING);
             return;
         }
 

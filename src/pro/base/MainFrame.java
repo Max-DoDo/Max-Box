@@ -107,7 +107,7 @@ public class MainFrame extends JFrame {
         MColor.setColorStyle(Integer.parseInt(PropertiesReader.get("ColorStyle")));
 
         //初始化字体
-        Tools.InitGlobalFont(new Font(PropertiesReader.get("GlobalFont"), Font.BOLD, 20));
+        Tools.InitGlobalFont(new Font(PropertiesReader.get("GlobalFont"), Font.PLAIN, 20));
 
         init();
     }
