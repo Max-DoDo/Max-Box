@@ -1,11 +1,11 @@
 package pro.calendar.ui;
 
+import pro.base.SuperCPanel;
 import pro.calendar.al.MCalendar;
 import pro.calendar.al.Time;
 import tools.MColor;
 import tools.PropertiesReader;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -19,7 +19,7 @@ import java.awt.*;
  * @author Max
  * @date 2023/07/03 14:15
  **/
-public class MainCalPanel extends JPanel {
+public class MainCalPanel extends SuperCPanel {
 
     /**
      * 日历格子. 每个月份都拥有42个日历格子, 采用7*6的方式排序. 可以涵盖本月的所有日期
@@ -42,7 +42,6 @@ public class MainCalPanel extends JPanel {
         this.setBounds(0, 0,
                 Integer.parseInt(PropertiesReader.get("MainPanelWidth")),
                 Integer.parseInt(PropertiesReader.get("MainPanelHeight")));
-
         this.initGrids();
     }
 
@@ -79,7 +78,7 @@ public class MainCalPanel extends JPanel {
     /**
      * 初始化每个格子的日期
      */
-    private void initDate(){
+    private void initDate() {
 
         //获取当前的日期
         int year = MCalendar.getCurrentYear();
@@ -87,7 +86,7 @@ public class MainCalPanel extends JPanel {
         int day = MCalendar.getCurrentDay();
 
         //把日历调整为当前的月份, 且日期为1
-        MCalendar.setDate(year,1);
+        MCalendar.setDate(year, 1);
 
         //这个月的总天数
         int dayOfMonth = MCalendar.getTotalDayInMonth();
@@ -95,7 +94,6 @@ public class MainCalPanel extends JPanel {
 
         //这个月在日历上显示时前方有几个空格. 获得当前星期几减少1即可. 例如星期1开始的月份在日历上前方没有空格.
         int blank = MCalendar.getDayInWeek() - 1;
-        System.out.println(MCalendar.getDayInWeek());
 
         //数组索引
         int x = blank;
@@ -107,20 +105,20 @@ public class MainCalPanel extends JPanel {
 
         dateGrids[x][y].setShowMonth(true);
 
-        for(int i = 1; i <= dayOfMonth; i++){
-            if(x == dateGrids.length){
+        for (int i = 1; i <= dayOfMonth; i++) {
+            if (x == dateGrids.length) {
                 x = 0;
                 y += 1;
             }
 
-            dateGrids[x][y].setTime(new Time(year,month,i));
+            dateGrids[x][y].setTime(new Time(year, month, i));
 
-            if(i == day){
+            if (i == day) {
                 dateGrids[x][y].setHighLight(true);
                 isToday = true;
             }
 
-            if(!isToday){
+            if (!isToday) {
                 dateGrids[x][y].setPasted(true);
             }
             x++;
@@ -129,60 +127,59 @@ public class MainCalPanel extends JPanel {
         //========================================================
         //初始化上个月的格子
 
-        if(blank != 0){
-            if(month == 1){
+        if (blank != 0) {
+            if (month == 1) {
                 dateGrids[0][0].setShowYear(true);
                 month = 12;
                 year--;
-            }else{
-                month --;
+            } else {
+                month--;
             }
 
             //把日历调整为当前的月份, 且日期为1
-            MCalendar.setDate(year,month);
+            MCalendar.setDate(year, month);
             //这个月的总天数
             dayOfMonth = MCalendar.getTotalDayInMonth();
             int last = dayOfMonth - blank;
 
             dateGrids[0][0].setShowMonth(true);
 
-            for(int i = dayOfMonth; i > last; i--){
-                dateGrids[blank - 1][0].setTime(new Time(year,month,i));
+            for (int i = dayOfMonth; i > last; i--) {
+                dateGrids[blank - 1][0].setTime(new Time(year, month, i));
                 dateGrids[blank - 1][0].setPasted(true);
                 blank--;
             }
         }
 
 
-
         //========================================================
         //初始化下个月的格子
 
-        if(month == 12){
+        if (month == 12) {
             dateGrids[x][y].setShowYear(true);
             month = 1;
             year++;
-        }else{
+        } else {
             month += 2;
         }
 
         //把日历调整为当前的月份, 且日期为1
-        MCalendar.setDate(year,month);
+        MCalendar.setDate(year, month);
         day = 1;
 
         dateGrids[x][y].setShowMonth(true);
-        while(x < 7){
+        while (x < 7) {
 
-            dateGrids[x][y].setTime(new Time(year,month,day));
+            dateGrids[x][y].setTime(new Time(year, month, day));
             x++;
             day++;
         }
 
     }
 
-    public void updateSelected(DateGrid dateGrid){
+    public void updateSelected(DateGrid dateGrid) {
 
-        if(selectedGrid == null){
+        if (selectedGrid == null) {
             selectedGrid = dateGrid;
             return;
         }
@@ -193,10 +190,18 @@ public class MainCalPanel extends JPanel {
 
     /**
      * 切换显示到其他月份
-     * @param year 年份
+     *
+     * @param year  年份
      * @param month 月份
      */
-    public void switchMonth(int year,int month){
+    public void switchMonth(int year, int month) {
 
     }
+
+    @Override
+    public void rePaint(){
+        super.rePaint();
+
+    }
+
 }

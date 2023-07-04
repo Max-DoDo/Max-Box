@@ -148,10 +148,8 @@ public final class DateGrid extends JPanel implements MouseListener {
      * <p>
      */
     public void rePaint() {
-
         this.rePaintThis();
         this.drawTitle();
-
     }
 
     /**
@@ -183,10 +181,7 @@ public final class DateGrid extends JPanel implements MouseListener {
                 this.setBackground(MColor.CB_FUTURE);
             }
         }
-
-
     }
-
 
     /**
      * 鼠标单击本面板的实现方法
@@ -200,10 +195,8 @@ public final class DateGrid extends JPanel implements MouseListener {
             this.isPreSelected = true;
             this.father.updateSelected(this);
         }
-
         this.rePaint();
     }
-
 
     /**
      * 设置时间. 这个方法会自动在设置时间后重绘该控件, 以此标题栏上显示的内容
@@ -216,55 +209,6 @@ public final class DateGrid extends JPanel implements MouseListener {
 
     private void drawTitle() {
         textButton.setTime(this.time);
-    }
-
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        this.isPressing = true;
-        this.rePaint();
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        this.isPressing = false;
-        this.rePaint();
-
-        if(this.isSelecting){
-            this.click();
-        }
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        this.isSelecting = true;
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        this.isSelecting = false;
-        this.rePaint();
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        textButton.setSize(this.getWidth(), this.getHeight() / 6);
-        super.paintComponent(g);
-    }
-
-    @Override
-    public String toString(){
-
-        if(this.time == null){
-            return super.toString();
-        }
-
-        return this.time.getMonth() + " " + this.time.getDay();
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
     }
 
 //===================================get和set方法=======================================
@@ -332,5 +276,52 @@ public final class DateGrid extends JPanel implements MouseListener {
     public void setShowYear(boolean showYear) {
         isShowYear = showYear;
         this.textButton.setShowYear(showYear);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        this.isPressing = true;
+        this.rePaint();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        this.isPressing = false;
+        this.rePaint();
+
+        if(this.isSelecting){
+            this.click();
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        this.isSelecting = true;
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        this.isSelecting = false;
+        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        this.rePaint();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        textButton.setSize(this.getWidth(), this.getHeight() / 6);
+        super.paintComponent(g);
+    }
+
+    @Override
+    public String toString(){
+        if(this.time == null){
+            return super.toString();
+        }
+        return this.time.getMonth() + " " + this.time.getDay();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
     }
 }

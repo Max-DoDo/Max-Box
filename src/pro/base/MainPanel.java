@@ -5,7 +5,6 @@ import tools.Constant;
 import tools.MColor;
 import tools.PropertiesReader;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -19,7 +18,7 @@ import java.awt.*;
  * @author Max
  * @date 2023/07/01 22:14
  **/
-public class MainPanel extends JPanel {
+public class MainPanel extends SuperCPanel {
 
 
     private CalendarPanel calPanel;
@@ -75,8 +74,9 @@ public class MainPanel extends JPanel {
         this.add(notePanel,Constant.NOTEBOOK);
     }
 
+    @Override
     public void rePaint() {
-
+        super.rePaint();
         calPanel.rePaint();
         notePanel.rePaint();
     }

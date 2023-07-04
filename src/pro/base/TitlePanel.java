@@ -6,10 +6,7 @@ import tools.PropertiesReader;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 /**
  * 标题栏
@@ -17,7 +14,7 @@ import java.awt.event.MouseListener;
  *
  * </p>
  */
-public class TitlePanel extends JPanel implements ActionListener, MouseListener {
+public class TitlePanel extends JPanel implements ActionListener, MouseListener,MouseMotionListener{
 
     /**
      * 标题图标
@@ -72,6 +69,16 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
 
     private int height;
 
+    /**
+     * 鼠标拖动定位用变量
+     */
+    private int newX,newY,oldX,oldY;
+
+    /**
+     * 鼠标拖动定位用变量
+     */
+    private int startX,startY;
+
 
     /**
      * 默认构造函数
@@ -87,6 +94,21 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
 
         width = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
         height = Constant.TITLE_PANEL_HEIGHT;
+        this.setSize(width, height);
+        this.setLayout(null);
+        this.setBackground(MColor.TITLE_PANEL);
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+
+        this.initIcon();
+        this.initButton();
+        this.initIconMenu();
+        this.initSettingButton();
+    }
+
+    public void init(int width, int height){
+        this.width = width;
+        this.height = height;
         this.setSize(width, height);
         this.setLayout(null);
         this.setBackground(MColor.TITLE_PANEL);
@@ -246,7 +268,7 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
     }
 
     /**
-     * 重新设置控件的大小和位置
+     * 重新设置控件的大小
      */
     public void rePaintSelf() {
 
@@ -331,12 +353,13 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
         MainFrame mf = (MainFrame) this.getRootPane().getParent();
 
         if(mf.isFullScreen()){
+            System.out.println("to normal");
             mf.reState(JFrame.NORMAL);
         }else{
+            System.out.println("to max");
             mf.reState(JFrame.MAXIMIZED_BOTH);
         }
 
-        rePaint();
     }
 
     /**
@@ -458,8 +481,24 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        exitButton.setIcon(exitIcon);
-//        rePaintButton();
+
+        Object source = e.getSource();
+
+        if(source.equals(exitButton)){
+            exitButton.setIcon(exitIcon);
+            return;
+        }
+
+        if(source.equals(this)){
+            Component cp = (Component)source;
+            MainFrame mf = (MainFrame) this.getRootPane().getParent();
+            //当鼠标点下的时候记录组件当前的坐标与鼠标当前在屏幕的位置
+            startX = mf.getX();
+            startY = mf.getY();
+            oldX = e.getXOnScreen();
+            oldY = e.getYOnScreen();
+        }
+
     }
 
     @Override
@@ -471,4 +510,34 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener 
     public void mouseClicked(MouseEvent e) {}
     @Override
     public void mouseReleased(MouseEvent e) {}
+
+    /**
+     * 通过拖动鼠标来更改窗体的位置
+     * @param e the event to be processed
+     */
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        Component cp = (Component)e.getSource();
+
+        if(cp.equals(this)){
+
+            MainFrame mf = (MainFrame) this.getRootPane().getParent();
+
+            //拖动的时候记录新坐标
+            newX = e.getXOnScreen();
+            newY = e.getYOnScreen();
+            //设置bounds,将点下时记录的组件开始坐标与鼠标拖动的距离相加
+            mf.setLocation(startX+(newX - oldX),startY+(newY - oldY));
+            mf.setFullScreen(false);
+
+            this.rePaint();
+
+        }
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
 }

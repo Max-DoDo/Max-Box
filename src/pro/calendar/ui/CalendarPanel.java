@@ -1,9 +1,8 @@
 package pro.calendar.ui;
 
 import pro.base.MainPanel;
+import pro.base.SuperCPanel;
 import tools.MColor;
-
-import javax.swing.*;
 
 /**
  * <h2>
@@ -18,7 +17,7 @@ import javax.swing.*;
  * @see MainPanel
  * @see java.util.Calendar
  **/
-public final class CalendarPanel extends JPanel {
+public final class CalendarPanel extends SuperCPanel {
 
     MainCalPanel mainCalPanel;
 
@@ -38,7 +37,10 @@ public final class CalendarPanel extends JPanel {
 
     }
 
+    @Override
     public void rePaint(){
 
+        super.rePaint();
+        mainCalPanel.rePaint();
     }
 }

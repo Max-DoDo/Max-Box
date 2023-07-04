@@ -72,7 +72,7 @@ public class MainFrame extends JFrame {
 //        this.setAlwaysOnTop(true);
 
         //设置非全屏时的窗体大小
-        this.setBounds(0, 0, 300, 1100);
+        this.setBounds(0, 0, 500, 1100);
 
         //最大化
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -80,6 +80,11 @@ public class MainFrame extends JFrame {
 
         //去边框
         this.setUndecorated(true);
+
+        //用于设置在窗体的边框取消后仍然可以拉伸
+        ResizeAdapter resizeAdapter = new ResizeAdapter(this);
+        this.addMouseListener(resizeAdapter);
+        this.addMouseMotionListener(resizeAdapter);
 
         //使用绝对布局管理器
         this.setLayout(null);
@@ -129,17 +134,18 @@ public class MainFrame extends JFrame {
         //重绘面板的颜色
 //        rePaint();
 
+        this.add(titlePanel);
+        this.add(sidePanel);
+        this.add(mainPanel);
+
         //初始化标题面板
         titlePanel.init();
-        this.add(titlePanel);
 
         //初始化侧栏面板
         sidePanel.init();
-        this.add(sidePanel);
 
         //初始化主面板
         mainPanel.init();
-        this.add(mainPanel);
 
         this.loadData();
 
@@ -148,6 +154,7 @@ public class MainFrame extends JFrame {
 
 
     }
+
 
     /**
      * 从配置文件和数据中加载
@@ -169,6 +176,28 @@ public class MainFrame extends JFrame {
      */
     private void rePaint() {
         //设置UI配色
+        this.updateIsFullScreen();
+    }
+
+    /**
+     * 更新该窗体是否是全屏状态
+     */
+    private void updateIsFullScreen(){
+
+        int oriWidth = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
+        int oriHeight = Integer.parseInt(PropertiesReader.get("ScreenHeight"));
+
+
+        //这个表达式大概意思就是如果这个窗体的坐标不在0,0. 或者他的大小和初始化窗体时检测的屏幕大小不一致就将值置为false
+        if(this.getX() == 0 && this.getY() == 0 &&
+                this.getWidth() == oriWidth &&
+                this.getHeight() == oriHeight){
+            System.out.println("true");
+            this.setFullScreen(true);
+            return;
+        }
+        this.setFullScreen(false);
+        System.out.println("false");
 
     }
 
@@ -182,15 +211,15 @@ public class MainFrame extends JFrame {
 
         if (state == JFrame.NORMAL) {
             this.isFullScreen = false;
+
         }
 
         if (state == JFrame.MAXIMIZED_BOTH) {
+            this.setLocation(0,0);
             this.isFullScreen = true;
         }
 
-        rePaintAll();
-        Tools.println("修改窗体大小");
-
+        this.rePaintAll();
     }
 
     /**
@@ -200,7 +229,9 @@ public class MainFrame extends JFrame {
      * </p>
      */
     public void rePaintAll() {
-//        this.rePaint();
+
+
+        this.rePaint();
         titlePanel.rePaint();
         sidePanel.rePaint();
         mainPanel.rePaint();
@@ -231,4 +262,13 @@ public class MainFrame extends JFrame {
         return isFullScreen;
     }
 
+    public void setFullScreen(boolean isFullScreen){
+        this.isFullScreen = isFullScreen;
+    }
+
+    @Override
+    public void repaint() {
+        this.rePaintAll();
+        super.repaint();
+    }
 }
