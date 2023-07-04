@@ -192,12 +192,10 @@ public class MainFrame extends JFrame {
         if(this.getX() == 0 && this.getY() == 0 &&
                 this.getWidth() == oriWidth &&
                 this.getHeight() == oriHeight){
-            System.out.println("true");
             this.setFullScreen(true);
             return;
         }
         this.setFullScreen(false);
-        System.out.println("false");
 
     }
 
