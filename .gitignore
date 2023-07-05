@@ -1,17 +1,29 @@
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-#编译的Java字节码文件
-*.class
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
-#输出文件
-\out
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-#idea的项目配置文件
+### VS Code ###
+.vscode/
 
-\.idea
-
-# git的相关文件
-*.gitattributes
-
-
-# idea的配置文件
-Max-Box.iml
+### Mac OS ###
+.DS_Store

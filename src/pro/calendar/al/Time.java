@@ -17,16 +17,13 @@ public class Time {
 
     private int month;
 
-    private int week;
-
     private int day;
 
+    public static final int EQUAL = 0;
 
-    private String weekDay;
+    public static final int OLDER = 1;
 
-    private boolean isToday;
-
-
+    public static final int YOUNGER = 2;
 
     public Time(int year, int month, int day){
         this.year = year;
@@ -34,13 +31,56 @@ public class Time {
         this.day = day;
     }
 
-//    /**
-//     * 返回下一天的时间对象
-//     * @return
-//     */
-//    public Time nextDay(){
-//        return new Time();
-//    }
+    public Time(int year, int month){
+        this.year = year;
+        this.month = month;
+        this.day = 1;
+    }
+
+    public int compare(Time time){
+
+        if(this.year > time.year){
+            return YOUNGER;
+        } else if (this.year < time.year) {
+            return  OLDER;
+        }
+
+        if(this.month < time.month){
+            return OLDER;
+        } else if (this.month > time.month) {
+            return  YOUNGER;
+        }
+
+        if(this.day < time.day){
+            return OLDER;
+        } else if (this.day > time.day) {
+            return  YOUNGER;
+        }
+
+        return EQUAL;
+    }
+
+    public void stepMonth(boolean toward){
+
+        if(toward){
+            if(this.month == 12){
+                this.month = 1;
+                year++;
+            }else{
+                this.month++;
+            }
+        }else{
+            if(this.month == 1){
+                this.month = 12;
+                year--;
+            }else{
+                this.month--;
+            }
+        }
+
+
+    }
+
 
     public int getDay(){
         return this.day;
@@ -54,5 +94,9 @@ public class Time {
         return this.year;
     }
 
+    @Override
+    public String toString() {
 
+        return "Time: " + year + "\t" + month + "\t" + day;
+    }
 }

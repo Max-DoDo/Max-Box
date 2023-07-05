@@ -1,8 +1,8 @@
 package pro.calendar.ui;
 
 import pro.base.SuperCPanel;
+import pro.calendar.al.GridGenerator;
 import pro.calendar.al.MCalendar;
-import pro.calendar.al.Time;
 import tools.MColor;
 import tools.PropertiesReader;
 
@@ -24,11 +24,21 @@ public class MainCalPanel extends SuperCPanel {
     /**
      * 日历格子. 每个月份都拥有42个日历格子, 采用7*6的方式排序. 可以涵盖本月的所有日期
      */
-    private DateGrid[][] dateGrids = new DateGrid[7][6];
+    private final DateGrid[][] dateGrids = new DateGrid[7][6];
 
+    /**
+     * 当前正在选择的日期格子的引用
+     */
     private DateGrid selectedGrid;
 
-    private GridBagLayout gbLayout;
+    /**
+     * 本类对象使用的布局管理器. 使用网格包布局管理.
+     */
+    private final GridBagLayout gbLayout;
+
+    private int year;
+    private int month;
+    private int day;
 
     /**
      * 构造函数
@@ -72,244 +82,22 @@ public class MainCalPanel extends SuperCPanel {
             }
         }
 
-        //TODO testing
-        this.updateDate(1999,1);
+        this.updateDate(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
     }
 
     /**
-     * 初始化每个格子的日期
-     */
-    private void updateDate() {
-
-        //获取当前的日期
-        int year = MCalendar.getCurrentYear();
-        int month = MCalendar.getCurrentMonth();
-        int day = MCalendar.getCurrentDay();
-
-        //把日历调整为当前的月份, 且日期为1
-        MCalendar.setDate(year, month);
-
-        //这个月的总天数
-        int dayOfMonth = MCalendar.getTotalDayInMonth();
-        //第一天是星期几
-
-        //这个月在日历上显示时前方有几个空格. 获得当前星期几减少1即可. 例如星期1开始的月份在日历上前方没有空格.
-        int blank = MCalendar.getDayInWeek() - 1;
-
-        //数组索引
-        int x = blank;
-        int y = 0;
-        boolean isToday = false;
-
-        //========================================================
-        //初始化本月的格子
-
-        dateGrids[x][y].setShowMonth(true);
-
-        for (int i = 1; i <= dayOfMonth; i++) {
-            if (x == dateGrids.length) {
-                x = 0;
-                y += 1;
-            }
-
-            dateGrids[x][y].setTime(new Time(year, month, i));
-
-            if (i == day) {
-                dateGrids[x][y].setHighLight(true);
-                isToday = true;
-            }
-
-            if (!isToday) {
-                dateGrids[x][y].setPasted(true);
-            }
-            x++;
-        }
-
-        //========================================================
-        //初始化上个月的格子
-
-        if (blank != 0) {
-            if (month == 1) {
-                dateGrids[0][0].setShowYear(true);
-                month = 12;
-                year--;
-            } else {
-                month--;
-            }
-
-            //把日历调整为当前的月份, 且日期为1
-            MCalendar.setDate(year, month);
-            //这个月的总天数
-            dayOfMonth = MCalendar.getTotalDayInMonth();
-            int last = dayOfMonth - blank;
-
-            dateGrids[0][0].setShowMonth(true);
-
-            for (int i = dayOfMonth; i > last; i--) {
-                dateGrids[blank - 1][0].setTime(new Time(year, month, i));
-                dateGrids[blank - 1][0].setPasted(true);
-                blank--;
-            }
-        }
-
-
-        //========================================================
-        //初始化下个月的格子
-
-        if (month == 12) {
-            dateGrids[x][y].setShowYear(true);
-            month = 1;
-            year++;
-        } else {
-            month += 2;
-        }
-
-        //把日历调整为当前的月份, 且日期为1
-        MCalendar.setDate(year, month);
-        day = 1;
-
-        dateGrids[x][y].setShowMonth(true);
-        while (x < 7) {
-
-            dateGrids[x][y].setTime(new Time(year, month, day));
-            x++;
-            day++;
-        }
-
-    }
-
-    /**
-     * 切换显示到其他月份
+     * 让日历显示一个月份
      *
      * @param yr  年份
      * @param mth 月份
      */
     public void updateDate(int yr, int mth) {
 
-        if(yr == -1 || mth == -1){
-            int year = MCalendar.getCurrentYear();
-            int month = MCalendar.getCurrentMonth();
+        new GridGenerator(yr,mth).generator(dateGrids);
+    }
 
-        }
-        //获取当前的日期
-        int year = yr;
-        int month = mth;
-        int day = MCalendar.getCurrentDay();
+    private void updateLast(){
 
-        //把日历调整为当前的月份, 且日期为1
-        MCalendar.setDate(year, month);
-
-        //这个月的总天数
-        int dayOfMonth = MCalendar.getTotalDayInMonth();
-        //第一天是星期几
-
-        //这个月在日历上显示时前方有几个空格. 获得当前星期几减少1即可. 例如星期1开始的月份在日历上前方没有空格.
-        int blank = MCalendar.getDayInWeek() - 1;
-
-        //数组索引
-        int x = blank;
-        int y = 0;
-        int count = blank;
-        boolean isToday = false;
-
-        //========================================================
-        //初始化本月的格子
-
-        //本月第一个格子必定显示月份或年份
-        if(month == 1){
-            dateGrids[x][y].setShowYear(true);
-        }else{
-            dateGrids[x][y].setShowMonth(true);
-        }
-
-        //使用单循环手动递增第二维度索引
-        for (int i = 1; i <= dayOfMonth; i++) {
-            if (x == dateGrids.length) {
-                x = 0;
-                y += 1;
-            }
-
-            //初始化
-            dateGrids[x][y].setTime(new Time(year, month, i));
-
-            count++;
-
-            //高亮今日
-            if (i == day) {
-                dateGrids[x][y].setHighLight(true);
-                isToday = true;
-            }
-
-            //今日之前的日期都会更暗的渲染
-            if (!isToday) {
-                dateGrids[x][y].setPasted(true);
-            }
-            x++;
-        }
-
-        //========================================================
-        //初始化上个月的格子
-
-        if (blank != 0) {
-            if (month == 1) {
-                month = 12;
-                year--;
-            } else {
-                month--;
-            }
-
-            //把日历调整为当前的月份, 且日期为1
-            MCalendar.setDate(year, month);
-            //这个月的总天数
-            dayOfMonth = MCalendar.getTotalDayInMonth();
-            int last = dayOfMonth - blank;
-
-            dateGrids[0][0].setShowMonth(true);
-
-            for (int i = dayOfMonth; i > last; i--) {
-                dateGrids[blank - 1][0].setTime(new Time(year, month, i));
-                dateGrids[blank - 1][0].setPasted(true);
-                blank--;
-            }
-        }
-
-
-        //========================================================
-        //初始化下个月的格子
-
-        if (x == dateGrids.length) {
-            x = 0;
-            y += 1;
-        }
-
-        if (month == 12) {
-            month = 2;
-            year++;
-        }else if(month == 11){
-            dateGrids[x][y].setShowYear(true);
-            month = 1;
-            year++;
-        }else{
-            month += 2;
-            dateGrids[x][y].setShowMonth(true);
-        }
-
-        //把日历调整为当前的月份, 且日期为1
-        MCalendar.setDate(year, month);
-        day = 1;
-
-        while (count < 42) {
-
-            if (x == dateGrids.length) {
-                x = 0;
-                y += 1;
-            }
-
-            dateGrids[x][y].setTime(new Time(year, month, day));
-            count++;
-            x++;
-            day++;
-        }
     }
 
     /**
