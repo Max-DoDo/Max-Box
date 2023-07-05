@@ -34,6 +34,12 @@ public class MFrame extends JFrame {
         init();
     }
 
+    public MFrame(String titleText){
+
+        titlePanel = new TitlePanel(titleText);
+        init();
+    }
+
     public MFrame(ImageIcon icon){
         titlePanel = new TitlePanel(icon);
         init();

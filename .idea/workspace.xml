@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcb9a8ee-a496-4f02-8486-e6f163263ce0" name="Changes" comment="feat: 新增保存项">
-      <change afterPath="$PROJECT_DIR$/src/pro/base/MFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pro/calendar/ui/EventFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/base/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/base/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/base/NotePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/note/ui/NotePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/base/SidePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/SidePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pro/base/MFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/MFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pro/base/TitlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/TitlePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/DateGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/DateGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/EventFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/EventFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,15 +143,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="feat: 新增保存项" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/pro/base/TitlePanel.java</url>
-          <line>356</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="GUI.SidePanel" memberName="focusButton" />

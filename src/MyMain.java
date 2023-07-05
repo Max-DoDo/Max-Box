@@ -45,7 +45,9 @@ public final class MyMain {
         MColor.setColorStyle(Integer.parseInt(PropertiesReader.get("ColorStyle")));
 
         //初始化字体
-        Tools.InitGlobalFont(new Font(PropertiesReader.get("GlobalFont"), Font.PLAIN, 20));
+        Tools.InitGlobalFont(new Font(PropertiesReader.get("GlobalFont"),
+                Font.PLAIN,
+                Integer.parseInt(PropertiesReader.get("FontSize"))));
     }
 
 }

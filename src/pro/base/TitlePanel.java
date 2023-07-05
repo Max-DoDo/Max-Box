@@ -2,6 +2,7 @@ package pro.base;
 
 import tools.Constant;
 import tools.MColor;
+import tools.PropertiesReader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +20,11 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
      * 标题图标
      */
     private JButton titleIcon;
+
+    /**
+     * 标题文本
+     */
+    private JLabel titleText;
 
     /**
      * 标题图标的下拉菜单框架
@@ -79,15 +85,27 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
     private int startX,startY;
 
 
-    /**
-     * 默认构造函数
-     */
-    public TitlePanel() {
+    public TitlePanel(){
         init();
     }
 
+    /**
+     * 通过标题文本创建
+     * @param title 显示的文本
+     */
+    public TitlePanel(String title) {
+        this.initText(title);
+        init();
+    }
+
+    /**
+     * 通过标题图标创建
+     * @param icon 标题图标
+     */
     public TitlePanel(ImageIcon icon){
         this.initIcon(icon);
+
+        this.initSettingButton();
         init();
     }
 
@@ -101,9 +119,21 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
 
         this.initButton();
         this.initIconMenu();
-        this.initSettingButton();
+
     }
 
+
+    private void initText(String title) {
+
+        titleText = new JLabel(title);
+        titleText.setFont(new Font(PropertiesReader.get("GlobalFont"),
+                Font.PLAIN,
+                Integer.parseInt(PropertiesReader.get("FontSize")) - 2));
+        titleText.setLocation(10, 7);
+        titleText.setSize(300, 30);
+
+        this.add(titleText);
+    }
 
     /**
      * 初始化最左边logo按钮的相关设置
@@ -222,7 +252,10 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
 
         rePaintSelf();
         rePaintButton();
-        rePaintSettingButton();
+
+        if(settingButton != null){
+            rePaintSettingButton();
+        }
     }
 
     /**
@@ -247,7 +280,6 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
         closeButton.setBackground(MColor.TITLE_PANEL);
         resizeButton.setBackground(MColor.TITLE_PANEL);
         exitButton.setBackground(MColor.TITLE_PANEL);
-        settingButton.setBackground(MColor.TITLE_PANEL);
 
         //三个按钮 的高度和宽度是一样的
         int width = this.getHeight() + 10;
@@ -281,9 +313,9 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
         int width = this.getHeight();
         int height = this.getHeight();
 
+        settingButton.setBackground(MColor.TITLE_PANEL);
         //设置长和宽
         settingButton.setSize(width,height);
-
         //设置位置
         settingButton.setLocation(closeButton.getX() - width,0);
     }

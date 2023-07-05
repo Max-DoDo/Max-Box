@@ -189,7 +189,7 @@ public final class DateGrid extends JPanel implements MouseListener {
     public void click() {
         if(this.isPreSelected){
             //点击过两次
-            this.isSelected = true;
+            new EventFrame();
         }else{
             //点击了一次
             this.isPreSelected = true;
