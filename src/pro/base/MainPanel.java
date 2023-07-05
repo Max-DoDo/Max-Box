@@ -22,11 +22,11 @@ import java.awt.*;
 public class MainPanel extends SuperCPanel {
 
 
-    private CalendarPanel calPanel;
+    private final CalendarPanel calPanel;
 
-    private NotePanel notePanel;
+    private final NotePanel notePanel;
 
-    private CardLayout card;
+    private final CardLayout card;
 
     private int width;
 
@@ -49,9 +49,7 @@ public class MainPanel extends SuperCPanel {
         PropertiesReader.set("MainPanelHeight",String.valueOf(height));
 
 
-        // 给内部成员变量点值. 设置它们的名字用来让卡片布局管理器调用
         calPanel = new CalendarPanel();
-
         notePanel = new NotePanel();
 
         card = new CardLayout();

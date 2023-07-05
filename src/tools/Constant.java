@@ -12,4 +12,7 @@ public final class Constant {
 
     public static final String NOTEBOOK = "notebook";
 
+    public static final int FUNCTION_PANEL_HEIGHT = 80;
+
+
 }

@@ -23,7 +23,7 @@ public class SuperCPanel extends JPanel {
     }
 
     public void updateSize(){
-        MainFrame mf = (MainFrame)this.getRootPane().getParent();
+        MFrame mf = (MFrame) this.getRootPane().getParent();
         int width = mf.getWidth() - Constant.SIDE_PANEL_WIDTH;
         int height = mf.getHeight() - Constant.TITLE_PANEL_HEIGHT;
 

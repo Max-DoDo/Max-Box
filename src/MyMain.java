@@ -1,5 +1,4 @@
 import pro.base.MainFrame;
-import pro.calendar.ui.EventFrame;
 import tools.MColor;
 import tools.PropertiesReader;
 import tools.Tools;
@@ -29,8 +28,7 @@ public final class MyMain {
         setting();
         new MainFrame();
 
-        //TODO TEST
-        new EventFrame();
+//        new EventFrame();
     }
 
     private static void setting(){

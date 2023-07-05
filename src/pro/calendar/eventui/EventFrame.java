@@ -1,4 +1,4 @@
-package pro.calendar.ui;
+package pro.calendar.eventui;
 
 import pro.base.MFrame;
 import tools.PropertiesReader;

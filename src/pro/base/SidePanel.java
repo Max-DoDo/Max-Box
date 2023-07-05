@@ -1,5 +1,6 @@
 package pro.base;
 
+import pro.calendar.ui.PanelBorder;
 import tools.Constant;
 import tools.MColor;
 import tools.PropertiesReader;
@@ -68,6 +69,9 @@ public class SidePanel extends JPanel implements ActionListener {
 
         //设置背景颜色
         this.setBackground(MColor.SIDE_PANEL);
+
+        //设置边框
+        this.setBorder(new PanelBorder());
 
         //设置布局管理器为绝对布局管理器
         this.setLayout(null);

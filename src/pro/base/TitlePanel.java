@@ -266,7 +266,6 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
         //本体的相关设置
         width = this.getRootPane().getParent().getWidth();
         height = Constant.TITLE_PANEL_HEIGHT;
-        System.out.println(width + " " + height);
         this.setSize(width, height);
 
     }
@@ -360,10 +359,8 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
         MFrame mf = (MFrame) this.getRootPane().getParent();
 
         if(mf.isFullScreen()){
-            System.out.println("to normal");
             mf.reState(JFrame.NORMAL);
         }else{
-            System.out.println("to max");
             mf.reState(JFrame.MAXIMIZED_BOTH);
         }
 

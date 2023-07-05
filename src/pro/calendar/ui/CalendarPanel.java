@@ -2,7 +2,8 @@ package pro.calendar.ui;
 
 import pro.base.MainPanel;
 import pro.base.SuperCPanel;
-import tools.MColor;
+
+import java.awt.*;
 
 /**
  * <h2>
@@ -21,19 +22,30 @@ public final class CalendarPanel extends SuperCPanel {
 
     MainCalPanel mainCalPanel;
 
+    FunctionPanel functionPanel;
+
+    SidePanel sidePanel;
+
 
     /**
      * 默认的构造函数
      */
     public CalendarPanel(){
 
-        this.setBackground(MColor.MAIN_PANEL);
-
+        this.setBackground(Color.PINK);
         this.setLayout(null);
 
-        mainCalPanel = new MainCalPanel();
+        sidePanel = new SidePanel(this);
+        this.add(sidePanel);
 
+        functionPanel = new FunctionPanel(this);
+        this.add(functionPanel);
+
+        mainCalPanel = new MainCalPanel(this);
         this.add(mainCalPanel);
+
+
+
 
     }
 
@@ -42,5 +54,10 @@ public final class CalendarPanel extends SuperCPanel {
 
         super.rePaint();
         mainCalPanel.rePaint();
+        sidePanel.rePaint();
+    }
+
+    public int getSidePanelWidth(){
+        return sidePanel.getWidth();
     }
 }

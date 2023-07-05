@@ -3,6 +3,7 @@ package pro.calendar.ui;
 import pro.base.SuperCPanel;
 import pro.calendar.al.GridGenerator;
 import pro.calendar.al.MCalendar;
+import tools.Constant;
 import tools.MColor;
 import tools.PropertiesReader;
 
@@ -36,6 +37,8 @@ public class MainCalPanel extends SuperCPanel {
      */
     private final GridBagLayout gbLayout;
 
+    private final CalendarPanel father;
+
     private int year;
     private int month;
     private int day;
@@ -43,15 +46,23 @@ public class MainCalPanel extends SuperCPanel {
     /**
      * 构造函数
      */
-    public MainCalPanel() {
+    public MainCalPanel(CalendarPanel superP) {
+
+        father = superP;
 
         gbLayout = new GridBagLayout();
 
+        int x = father.getSidePanelWidth();
+
+        int y = Constant.FUNCTION_PANEL_HEIGHT;
+        int width = Integer.parseInt(PropertiesReader.get("MainPanelWidth")) - x;
+        int height = Integer.parseInt(PropertiesReader.get("MainPanelHeight")) - y;
+
+        this.setLocation(x,y);
+        this.setSize(width,height);
+
         this.setLayout(gbLayout);
         this.setBackground(MColor.MAIN_PANEL);
-        this.setBounds(0, 0,
-                Integer.parseInt(PropertiesReader.get("MainPanelWidth")),
-                Integer.parseInt(PropertiesReader.get("MainPanelHeight")));
         this.initGrids();
     }
 
@@ -96,17 +107,6 @@ public class MainCalPanel extends SuperCPanel {
         new GridGenerator(yr,mth).generator(dateGrids);
     }
 
-    private void updateLast(){
-
-    }
-
-    /**
-     * gdd
-     */
-    private void getDateData(int yr, int mth){
-
-    }
-
     public void updateSelected(DateGrid dateGrid) {
 
         if (selectedGrid == null) {
@@ -119,11 +119,20 @@ public class MainCalPanel extends SuperCPanel {
     }
 
 
-
     @Override
     public void rePaint(){
         super.rePaint();
+    }
 
+    @Override
+    public void updateSize() {
+
+        int width = father.getWidth() - father.getSidePanelWidth();
+        int height = father.getHeight() - Constant.FUNCTION_PANEL_HEIGHT;
+
+        this.setLocation(0,this.getY());
+        System.out.println(father.getSidePanelWidth());
+        this.setSize(width,height);
     }
 
 }
