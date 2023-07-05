@@ -1,6 +1,7 @@
 package pro.base;
 
 import pro.calendar.ui.CalendarPanel;
+import pro.note.ui.NotePanel;
 import tools.Constant;
 import tools.MColor;
 import tools.PropertiesReader;
@@ -62,12 +63,6 @@ public class MainPanel extends SuperCPanel {
 
         //设置布局管理器为卡片布局管理器
         this.setLayout(card);
-    }
-
-    /**
-     * 初始化用方法
-     */
-    public void init() {
 
         //在添加的时候设置组件的名字用于让卡片布局管理器调用
         this.add(calPanel,Constant.CALENDAR);

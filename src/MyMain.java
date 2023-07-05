@@ -1,4 +1,10 @@
 import pro.base.MainFrame;
+import pro.calendar.ui.EventFrame;
+import tools.MColor;
+import tools.PropertiesReader;
+import tools.Tools;
+
+import java.awt.*;
 
 /**
  * <p> 
@@ -20,7 +26,26 @@ public final class MyMain {
      *  主方法, 启动程序的GUI
      */
     public static void main(String[] args){
-        new MainFrame().run();
+        setting();
+        new MainFrame();
+
+        //TODO TEST
+        new EventFrame();
+    }
+
+    private static void setting(){
+        //获得屏幕的宽高比
+        int[] screenSize = Tools.getScreenSize();
+
+        //写入配置文件
+        PropertiesReader.set("ScreenWidth",String.valueOf(screenSize[0]));
+        PropertiesReader.set("ScreenHeight", String.valueOf(screenSize[1]));
+
+        //初始化颜色类
+        MColor.setColorStyle(Integer.parseInt(PropertiesReader.get("ColorStyle")));
+
+        //初始化字体
+        Tools.InitGlobalFont(new Font(PropertiesReader.get("GlobalFont"), Font.PLAIN, 20));
     }
 
 }

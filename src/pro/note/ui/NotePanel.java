@@ -1,7 +1,8 @@
-package pro.base;
+package pro.note.ui;
+
+import tools.MColor;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * <h2>
@@ -17,7 +18,7 @@ import java.awt.*;
 public class NotePanel extends JPanel {
 
     public NotePanel(){
-        this.setBackground(Color.GREEN);
+        this.setBackground(MColor.MAIN_PANEL);
     }
 
     public void rePaint(){

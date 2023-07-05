@@ -1,11 +1,9 @@
 package pro.base;
 
-import tools.MColor;
 import tools.PropertiesReader;
 import tools.Tools;
 
 import javax.swing.*;
-import java.awt.*;
 
 
 /**
@@ -16,20 +14,7 @@ import java.awt.*;
  *
  * @author Maxwell
  */
-public class MainFrame extends JFrame {
-
-//    /**
-//     * 程序的底层面板, 所有的其他面板都在这个面板之上
-//     * 理论上来说这个面板应该会被覆盖的很惨所以没啥必要设置它的一大堆属性
-//     * 这是最底层的面板
-//     */
-//    private JPanel basePanel;
-
-    /**
-     * 标题面板. 因为Swing框架会调用系统自带的标题栏, 那个标题栏丑死了. 所以我隐藏了这个标题栏然后自己画一个新的上去
-     * 这个标题面板会在底层面板的最顶端
-     */
-    private TitlePanel titlePanel;
+public class MainFrame extends MFrame {
 
     /**
      * 因为这个项目的名字叫做M"Tools". 因此我决定让这个程序拥有许许多多我日常可能会用到的奇怪的功能, 因此在底层面板的右侧有一个小小的竖着
@@ -42,34 +27,15 @@ public class MainFrame extends JFrame {
      */
     private MainPanel mainPanel;
 
-//    /**
-//     * 存储屏幕的宽度
-//     */
-//    private int screenWidth;
-//
-//    /**
-//     * 存储屏幕的高度
-//     */
-//    private int screenHeight;
-
-    /**
-     * UI目前是否是全屏状态. 用于TitlePanel中控制最大化按钮的行为
-     */
-    private boolean isFullScreen;
-
     /**
      * <p>
      * 无参构造函数. 初始化一些简单的玩意
      */
     public MainFrame() {
+        super(new ImageIcon("./resource/titleIcon.png"));
 
+        Tools.println("主窗体初始化");
         this.setTitle(PropertiesReader.get("Title"));
-
-        //设置退出按钮
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        //窗体总是在最前端
-//        this.setAlwaysOnTop(true);
 
         //设置非全屏时的窗体大小
         this.setBounds(0, 0, 500, 1100);
@@ -77,42 +43,6 @@ public class MainFrame extends JFrame {
         //最大化
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.isFullScreen = true;
-
-        //去边框
-        this.setUndecorated(true);
-
-        //用于设置在窗体的边框取消后仍然可以拉伸
-        ResizeAdapter resizeAdapter = new ResizeAdapter(this);
-        this.addMouseListener(resizeAdapter);
-        this.addMouseMotionListener(resizeAdapter);
-
-        //使用绝对布局管理器
-        this.setLayout(null);
-
-    }
-
-    /**
-     * <p>
-     * 用于启动程序的方法. 抄隔壁Spring的启动名称.
-     * <p>
-     * 这个方法会依次调用每一个主窗体上的控件的初始化方法来完成整个窗体的初始化
-     */
-    public void run() {
-
-        Tools.println("主窗体初始化");
-
-        //获得屏幕的宽高比
-        int[] screenSize = Tools.getScreenSize();
-
-        //写入配置文件
-        PropertiesReader.set("ScreenWidth",String.valueOf(screenSize[0]));
-        PropertiesReader.set("ScreenHeight", String.valueOf(screenSize[1]));
-
-        //初始化颜色类
-        MColor.setColorStyle(Integer.parseInt(PropertiesReader.get("ColorStyle")));
-
-        //初始化字体
-        Tools.InitGlobalFont(new Font(PropertiesReader.get("GlobalFont"), Font.PLAIN, 20));
 
         init();
     }
@@ -124,40 +54,25 @@ public class MainFrame extends JFrame {
      * <p>
      * 然后大部分的绘制非本窗体的内容都会在这个方法中被调用.
      */
-    private void init() {
+    public void init() {
 
-        //初始化面板们
-        titlePanel = new TitlePanel();
         sidePanel = new SidePanel();
         mainPanel = new MainPanel();
 
-        //重绘面板的颜色
-//        rePaint();
-
-        this.add(titlePanel);
         this.add(sidePanel);
         this.add(mainPanel);
-
-        //初始化标题面板
-        titlePanel.init();
-
-        //初始化侧栏面板
-        sidePanel.init();
-
-        //初始化主面板
-        mainPanel.init();
 
         this.loadData();
 
         //设置窗口可见性为可见
         this.setVisible(true);
-
+        this.rePaintAll();
 
     }
 
 
     /**
-     * 从配置文件和数据中加载
+     * 从配置文件和数据中加载上次退出保存的数据
      */
     private void loadData(){
         loadCard();
@@ -174,7 +89,7 @@ public class MainFrame extends JFrame {
      * <p>
      * 从配置文件中调用UI的主题类型来获得不同的颜色集
      */
-    private void rePaint() {
+    public void rePaint() {
         //设置UI配色
         this.updateIsFullScreen();
     }
@@ -248,11 +163,10 @@ public class MainFrame extends JFrame {
     /**
      * 退出程序
      */
+    @Override
     public void exit() {
         Tools.println("退出程序");
-
         sidePanel.exit();
-
         System.exit(0);
     }
 
@@ -264,9 +178,4 @@ public class MainFrame extends JFrame {
         this.isFullScreen = isFullScreen;
     }
 
-    @Override
-    public void repaint() {
-        this.rePaintAll();
-        super.repaint();
-    }
 }

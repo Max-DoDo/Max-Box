@@ -47,21 +47,15 @@ public class SidePanel extends JPanel implements ActionListener {
      */
     private JButton focusButton;
 
-    private int width;
-
-    private int height;
+    /**
+     * 存储侧面板的长和宽, 在目前的构思下这个面板的长和宽是在主程序启动后就不会更改了的. 因为按钮是从上向下排布的.
+     */
+    private final int width,height;
 
     /**
      * 构造函数
      */
     public SidePanel() {
-        super();
-    }
-
-    /**
-     * 初始化该面板和其他属性的方法
-     */
-    public void init() {
 
         width = Constant.SIDE_PANEL_WIDTH;
         height = Integer.parseInt(PropertiesReader.get("ScreenHeight"));
