@@ -49,12 +49,16 @@ public class MColor {
     /**
      * 普通按钮选中颜色
      */
-    public static Color BUTTON_SELECTING;
+    public static Color BUTTON_ROLLOVER;
+
+    public static Color BUTTON_ROLLOVER1;
 
     /**
      * 普通按钮点击时颜色
      */
     public static Color BUTTON_PRESSING;
+
+    public static Color BUTTON_PRESSING1;
 
     /**
      * 今天及以后日期格子正常颜色
@@ -110,11 +114,14 @@ public class MColor {
 
         MAIN_PANEL = new Color(100, 100, 100);
         TITLE_PANEL = new Color(10, 10, 10);
-        SIDE_PANEL = new Color(10, 10, 10);
+        SIDE_PANEL = new Color(41, 41, 41);
 
         SPC_BUTTON_NORMAL = new Color(71, 158, 245);
-        BUTTON_SELECTING = new Color(46, 46, 46);
         BUTTON_PRESSING = new Color(8, 35, 56);
+        BUTTON_PRESSING1 = new Color(82,82,82);
+
+        BUTTON_ROLLOVER = new Color(46, 46, 46);
+        BUTTON_ROLLOVER1 = new Color(51,51,51);
 
         //日历
         CB_FUTURE = new Color(41, 41, 41);
@@ -136,8 +143,10 @@ public class MColor {
         SIDE_PANEL = new Color(240, 240, 240);
 
         SPC_BUTTON_NORMAL = new Color(15, 108, 189);
-        BUTTON_SELECTING = new Color(235, 235, 235);
         BUTTON_PRESSING = new Color(207, 228, 250);
+
+        BUTTON_ROLLOVER = new Color(235, 235, 235);
+        BUTTON_ROLLOVER1 = new Color(235,235,235);
 
         //日历
         CB_FUTURE = new Color(255,255,255);

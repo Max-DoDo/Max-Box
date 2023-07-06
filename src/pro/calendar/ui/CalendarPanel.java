@@ -60,8 +60,8 @@ public final class CalendarPanel extends SuperCPanel {
         super.rePaint();
 
         functionPanel.rePaint();
-        weekPanel.rePaint();
         sidePanel.rePaint();
+        weekPanel.rePaint();
         mainCalPanel.rePaint();
     }
 

@@ -83,8 +83,8 @@ public class MainCalPanel extends SuperCPanel {
                 gbc.gridy = i;
 
                 dateGrids[j][i] = new DateGrid(this);
-                this.add(dateGrids[j][i]);
                 gbLayout.setConstraints(dateGrids[j][i], gbc);
+                this.add(dateGrids[j][i]);
             }
         }
 

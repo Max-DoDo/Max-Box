@@ -5,21 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcb9a8ee-a496-4f02-8486-e6f163263ce0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pro/calendar/ui/WeekPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pro/base/TitleButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pro/calendar/ui/CalButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/base/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/base/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/MainPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pro/base/TitlePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/TitlePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/calendar/al/GridGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/al/GridGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/calendar/eventui/EventFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/eventui/NewEventFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/CalendarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/CalendarPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/DateGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/DateGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/FunctionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/FunctionPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/MainCalPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/MainCalPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/SidePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/SidePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/WeekPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/WeekPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tools/MColor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tools/MColor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
