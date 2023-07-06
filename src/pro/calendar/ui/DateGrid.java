@@ -2,7 +2,7 @@ package pro.calendar.ui;
 
 import pro.calendar.al.Event;
 import pro.calendar.al.Time;
-import pro.calendar.eventui.EventFrame;
+import pro.calendar.eventui.NewEventFrame;
 import tools.MColor;
 
 import javax.swing.*;
@@ -190,7 +190,7 @@ public final class DateGrid extends JPanel implements MouseListener {
     public void click() {
         if(this.isPreSelected){
             //点击过两次
-            new EventFrame();
+            new NewEventFrame();
         }else{
             //点击了一次
             this.isPreSelected = true;
@@ -278,6 +278,8 @@ public final class DateGrid extends JPanel implements MouseListener {
         isShowYear = showYear;
         this.textButton.setShowYear(showYear);
     }
+
+
 
     @Override
     public void mousePressed(MouseEvent e) {

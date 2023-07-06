@@ -7,10 +7,10 @@ import tools.PropertiesReader;
 
 /**
  * <h2>
- *
+ *      日历面板的侧窗体
  * </h2>
  * <p>
- *
+ *      这个窗体用于展示事件
  * </p>
  *
  * @author Max
@@ -18,8 +18,16 @@ import tools.PropertiesReader;
  **/
 public class SidePanel extends SuperCPanel {
 
+    /**
+     * 窗体所依靠的组件
+     */
     CalendarPanel father;
 
+    /**
+     * 构造函数, 设置窗体的位置大小和背景颜色.
+     * 设置窗体的边框
+     * @param superP 窗体所依靠的组件
+     */
     public SidePanel(CalendarPanel superP){
         father = superP;
 

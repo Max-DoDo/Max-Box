@@ -119,6 +119,7 @@ public class MainFrame extends MFrame {
      * @param state 设置窗体状态的常量
      * @see JFrame#NORMAL
      */
+    @Override
     public void reState(int state) {
         this.setExtendedState(state);
 
@@ -141,8 +142,8 @@ public class MainFrame extends MFrame {
      * 这要求所有子控件都重写repaint方法来重绘他们的大小
      * </p>
      */
+    @Override
     public void rePaintAll() {
-
 
         this.rePaint();
         titlePanel.rePaint();
@@ -165,15 +166,17 @@ public class MainFrame extends MFrame {
      */
     @Override
     public void exit() {
-        Tools.println("退出程序");
+        Tools.println("子类退出");
         sidePanel.exit();
         System.exit(0);
     }
 
+    @Override
     public boolean isFullScreen() {
         return isFullScreen;
     }
 
+    @Override
     public void setFullScreen(boolean isFullScreen){
         this.isFullScreen = isFullScreen;
     }

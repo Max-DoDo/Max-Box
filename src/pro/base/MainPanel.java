@@ -13,7 +13,7 @@ import java.awt.*;
  * 主面板的实现类
  * </h2>
  * <p>
- *
+ *  窗体的主面板
  * </p>
  *
  * @author Max
@@ -22,10 +22,19 @@ import java.awt.*;
 public class MainPanel extends SuperCPanel {
 
 
+    /**
+     * 日历面板的最底层
+     */
     private final CalendarPanel calPanel;
 
+    /**
+     * 记事本面板的最底层
+     */
     private final NotePanel notePanel;
 
+    /**
+     * 布局管理器, 本面板采用卡片布局管理器
+     */
     private final CardLayout card;
 
     private int width;
@@ -69,9 +78,18 @@ public class MainPanel extends SuperCPanel {
 
     @Override
     public void rePaint() {
+
         super.rePaint();
         calPanel.rePaint();
         notePanel.rePaint();
+    }
+
+    @Override
+    public void updateSize() {
+        width = this.getRootPane().getParent().getWidth() - Constant.SIDE_PANEL_WIDTH;
+        height = this.getRootPane().getParent().getHeight() - Constant.TITLE_PANEL_HEIGHT;
+
+        this.setSize(width,height);
     }
 
     public void switchPanel(String panelNum) {

@@ -28,7 +28,7 @@ public final class MyMain {
         setting();
         new MainFrame();
 
-//        new EventFrame();
+//        new NewEventFrame();
     }
 
     private static void setting(){

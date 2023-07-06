@@ -41,7 +41,6 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
      */
     private String[] menuItemName;
 
-
     /**
      * 最小化按钮
      */

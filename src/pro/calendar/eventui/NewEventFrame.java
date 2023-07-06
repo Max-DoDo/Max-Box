@@ -15,7 +15,7 @@ import tools.PropertiesReader;
  * @date 2023/07/05 20:11
  * @see MFrame
  **/
-public class EventFrame extends MFrame {
+public class NewEventFrame extends MFrame {
 
     private int x;
 
@@ -25,7 +25,7 @@ public class EventFrame extends MFrame {
 
     private int height;
 
-    public EventFrame() {
+    public NewEventFrame() {
         super(" 新事件 - 日历");
 
         width = 1200;

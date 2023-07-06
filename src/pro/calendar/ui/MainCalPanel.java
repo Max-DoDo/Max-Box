@@ -5,7 +5,6 @@ import pro.calendar.al.GridGenerator;
 import pro.calendar.al.MCalendar;
 import tools.Constant;
 import tools.MColor;
-import tools.PropertiesReader;
 
 import java.awt.*;
 
@@ -52,14 +51,10 @@ public class MainCalPanel extends SuperCPanel {
 
         gbLayout = new GridBagLayout();
 
-        int x = father.getSidePanelWidth();
+        int x = 0;
 
-        int y = Constant.FUNCTION_PANEL_HEIGHT;
-        int width = Integer.parseInt(PropertiesReader.get("MainPanelWidth")) - x;
-        int height = Integer.parseInt(PropertiesReader.get("MainPanelHeight")) - y;
-
+        int y = Constant.FUNCTION_PANEL_HEIGHT * 2;
         this.setLocation(x,y);
-        this.setSize(width,height);
 
         this.setLayout(gbLayout);
         this.setBackground(MColor.MAIN_PANEL);
@@ -93,6 +88,7 @@ public class MainCalPanel extends SuperCPanel {
             }
         }
 
+        //初始化每一个格子的内容
         this.updateDate(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
     }
 
@@ -104,9 +100,16 @@ public class MainCalPanel extends SuperCPanel {
      */
     public void updateDate(int yr, int mth) {
 
-        new GridGenerator(yr,mth).generator(dateGrids);
+        DateGrid todayGrid = new GridGenerator(yr,mth).generator(dateGrids);
+        if(todayGrid != null){
+            todayGrid.click();
+        }
     }
 
+    /**
+     * 更新成员变量{@code selectedGrid}的值, 将上一个被选中的值取消选中.
+     * @param dateGrid 被选中的格子
+     */
     public void updateSelected(DateGrid dateGrid) {
 
         if (selectedGrid == null) {
@@ -127,11 +130,9 @@ public class MainCalPanel extends SuperCPanel {
     @Override
     public void updateSize() {
 
-        int width = father.getWidth() - father.getSidePanelWidth();
-        int height = father.getHeight() - Constant.FUNCTION_PANEL_HEIGHT;
+        int width = father.getWidth() - father.getSidePanel().getWidth();
+        int height = father.getHeight() - Constant.FUNCTION_PANEL_HEIGHT * 2;
 
-        this.setLocation(0,this.getY());
-        System.out.println(father.getSidePanelWidth());
         this.setSize(width,height);
     }
 

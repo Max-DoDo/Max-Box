@@ -7,7 +7,7 @@ import tools.PropertiesReader;
 
 /**
  * <h2>
- *
+ *      功能面板
  * </h2>
  * <p>
  *
@@ -31,5 +31,15 @@ public class FunctionPanel extends SuperCPanel {
         this.setBackground(MColor.SIDE_PANEL);
         this.setBorder(new PanelBorder());
 
+    }
+
+    @Override
+    public void rePaint(){
+       super.rePaint();
+    }
+
+    @Override
+    public void updateSize(){
+        this.setBounds(0,0,father.getWidth(),Constant.FUNCTION_PANEL_HEIGHT);
     }
 }

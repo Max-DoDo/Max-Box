@@ -55,6 +55,9 @@ public class GridGenerator extends Object{
      */
     private Time today;
 
+
+    private DateGrid todayGrid;
+
     /**
      * 正在生成的月份是否是这个月
      */
@@ -119,14 +122,24 @@ public class GridGenerator extends Object{
 
     }
 
-    public void generator(DateGrid[][] dateGrids){
+    /**
+     * 生成一套日期格子, 并且返回今天的日期格子.
+     *
+     * @param dateGrids 要填充日期的已经初始化完毕的日期格子们
+     * @return 今天的日期的格子(如果有). 没有则返回null
+     */
+    public DateGrid generator(DateGrid[][] dateGrids){
 
         this.dg = dateGrids;
+
+        //第一个格子至少也要展示月份
         dg[0][0].setShowMonth(true);
 
         this.lastMonth();
         this.thisMonth();
         this.nextMonth();
+
+        return todayGrid;
     }
 
     private void generatorGrid(DateGrid dateGrid,Time time){
@@ -138,6 +151,7 @@ public class GridGenerator extends Object{
         switch (st){
             case Time.EQUAL -> {
                 dateGrid.setHighLight(true);
+                todayGrid = dateGrid;
             }
 
             case Time.OLDER ->  {

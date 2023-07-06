@@ -2,6 +2,7 @@ package pro.calendar.ui;
 
 import pro.base.MainPanel;
 import pro.base.SuperCPanel;
+import tools.Constant;
 
 import java.awt.*;
 
@@ -26,6 +27,8 @@ public final class CalendarPanel extends SuperCPanel {
 
     SidePanel sidePanel;
 
+    WeekPanel weekPanel;
+
 
     /**
      * 默认的构造函数
@@ -41,6 +44,9 @@ public final class CalendarPanel extends SuperCPanel {
         functionPanel = new FunctionPanel(this);
         this.add(functionPanel);
 
+        weekPanel = new WeekPanel(this);
+        this.add(weekPanel);
+
         mainCalPanel = new MainCalPanel(this);
         this.add(mainCalPanel);
 
@@ -51,13 +57,23 @@ public final class CalendarPanel extends SuperCPanel {
 
     @Override
     public void rePaint(){
-
         super.rePaint();
-        mainCalPanel.rePaint();
+
+        functionPanel.rePaint();
+        weekPanel.rePaint();
         sidePanel.rePaint();
+        mainCalPanel.rePaint();
     }
 
-    public int getSidePanelWidth(){
-        return sidePanel.getWidth();
+    @Override
+    public void updateSize() {
+        int width = this.getRootPane().getParent().getWidth() - Constant.SIDE_PANEL_WIDTH;
+        int height = this.getRootPane().getParent().getHeight() - Constant.TITLE_PANEL_HEIGHT;
+
+        this.setSize(width,height);
+    }
+
+    public SidePanel getSidePanel(){
+        return sidePanel;
     }
 }
