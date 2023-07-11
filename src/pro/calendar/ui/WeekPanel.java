@@ -1,10 +1,14 @@
 package pro.calendar.ui;
 
+import pro.calendar.al.MCalendar;
+import pro.calendar.al.Time;
+import tools.RoundBorder;
 import pro.base.SuperCPanel;
 import tools.Constant;
 import tools.MColor;
 
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * <h2>
@@ -17,7 +21,7 @@ import java.awt.*;
  * @author Max
  * @date 2023/07/06 15:30
  **/
-public class WeekPanel extends SuperCPanel {
+public class WeekPanel extends SuperCPanel implements ActionListener {
 
     private final CalendarPanel father;
 
@@ -41,37 +45,14 @@ public class WeekPanel extends SuperCPanel {
      */
     private CalButton selectButton;
 
-    /**
-     * 本类实例使用的网格包布局管理器
-     */
-    private GridBagLayout gb;
-
-    /**
-     * 本类实例使用的网格包布局管理器的约束实例
-     */
-    private GridBagConstraints gbc;
-
-
     public WeekPanel(CalendarPanel superP){
 
         father = superP;
 
-        //初始化布局管理器
-        gb = new GridBagLayout();
-        gbc = new GridBagConstraints();
-
-
-
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-
-        gbc.fill = GridBagConstraints.BOTH;
-
-
         //设置自己的一些属性
         this.setBorder(new PanelBorder());
         this.setBackground(MColor.SIDE_PANEL);
-        this.setLayout(new GridLayout(1,5));
+        this.setLayout(null);
 
         this.initButton();
 
@@ -83,26 +64,24 @@ public class WeekPanel extends SuperCPanel {
     private void initButton(){
 
         toTodayButton = new CalButton("今天");
-
-        gbc.gridwidth = 2;
-        gbc.gridheight = 1;
-
-        gb.setConstraints(toTodayButton,gbc);
+        toTodayButton.setBorder(new RoundBorder());
+        toTodayButton.addActionListener(this);
         this.add(toTodayButton);
 
-
         lastButton = new CalButton("last");
-        gb.setConstraints(lastButton,gbc);
+        lastButton.setBorder(null);
+        lastButton.addActionListener(this);
         this.add(lastButton);
 
         nextButton = new CalButton("next");
-
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-
-        gb.setConstraints(nextButton,gbc);
+        nextButton.setBorder(null);
+        nextButton.addActionListener(this);
         this.add(nextButton);
 
+        selectButton = new CalButton();
+        selectButton.setBorder(null);
+        selectButton.addActionListener(this);
+        this.add(selectButton);
 
     }
 
@@ -110,6 +89,7 @@ public class WeekPanel extends SuperCPanel {
 
     @Override
     public void rePaint(){
+
         super.rePaint();
         this.rePaintButton();
 
@@ -119,6 +99,26 @@ public class WeekPanel extends SuperCPanel {
      * 重新绘制按钮的位置, 大小, 内容和颜色.
      */
     private void rePaintButton(){
+
+        int height;
+
+        if(this.getHeight() / 2 - 5 >= 5){
+            height = this.getHeight() / 2 - 5;
+        }else{
+            height = this.getHeight() / 2;
+        }
+
+        toTodayButton.setSize(this.getWidth()/10 - 5,height);
+        toTodayButton.setLocation(5,5);
+
+        lastButton.setSize(height,height);
+        lastButton.setLocation(toTodayButton.getWidth() + toTodayButton.getX() + 5, 5);
+
+        nextButton.setSize(height,height);
+        nextButton.setLocation(lastButton.getWidth() + lastButton.getX() + 5, 5);
+
+        selectButton.setSize(this.getWidth() / 8 - 5,height);
+        selectButton.setLocation(nextButton.getWidth() + nextButton.getX() + 5, 5);
 
     }
 
@@ -130,4 +130,25 @@ public class WeekPanel extends SuperCPanel {
                 Constant.FUNCTION_PANEL_HEIGHT);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+
+        if(source.equals(lastButton)){
+            father.lastMonth();
+            return;
+        }
+
+        if(source.equals(nextButton)){
+            father.nextMonth();
+            return;
+        }
+
+        if(source.equals(toTodayButton)){
+            Time current = new Time(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
+            System.out.println(current);
+            father.updateMonth(current);
+            return;
+        }
+    }
 }

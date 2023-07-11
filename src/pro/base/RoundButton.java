@@ -1,6 +1,7 @@
 package pro.base;
 
 import tools.MColor;
+import tools.RoundBorder;
 
 import javax.swing.*;
 import java.awt.*;

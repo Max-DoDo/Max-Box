@@ -2,6 +2,8 @@ package pro.calendar.ui;
 
 import pro.base.MainPanel;
 import pro.base.SuperCPanel;
+import pro.calendar.al.MCalendar;
+import pro.calendar.al.Time;
 import tools.Constant;
 
 import java.awt.*;
@@ -21,6 +23,8 @@ import java.awt.*;
  **/
 public final class CalendarPanel extends SuperCPanel {
 
+    Time currentTime;
+
     MainCalPanel mainCalPanel;
 
     FunctionPanel functionPanel;
@@ -37,7 +41,15 @@ public final class CalendarPanel extends SuperCPanel {
 
         this.setBackground(Color.PINK);
         this.setLayout(null);
+        currentTime = new Time(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
 
+        init();
+    }
+
+    /**
+     * 用于向这个面板中添加子组件的方法
+     */
+    private void init(){
         sidePanel = new SidePanel(this);
         this.add(sidePanel);
 
@@ -48,11 +60,26 @@ public final class CalendarPanel extends SuperCPanel {
         this.add(weekPanel);
 
         mainCalPanel = new MainCalPanel(this);
+        mainCalPanel.updateDate(currentTime);
         this.add(mainCalPanel);
+    }
 
+    /**
+     * 更新主月份面板等操作面板所展示的月份
+     */
+    public void updateMonth(Time time){
+        currentTime = time;
+        mainCalPanel.updateDate(time);
+    }
 
+    public void nextMonth(){
+        currentTime.stepMonth(Time.TOWARD);
+        mainCalPanel.updateDate(currentTime);
+    }
 
-
+    public void lastMonth(){
+        currentTime.stepMonth(Time.BACKWARD);
+        mainCalPanel.updateDate(currentTime);
     }
 
     @Override

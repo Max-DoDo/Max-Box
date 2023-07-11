@@ -35,7 +35,7 @@ public class PanelBorder implements Border {
         g.drawLine(0,0,c.getWidth(),0);
         g.drawLine(c.getWidth(),0,c.getWidth(),c.getHeight());
 
-        g.drawLine(c.getWidth(),c.getHeight(),0,c.getHeight());
+        g.drawLine(0,c.getHeight(),c.getWidth(),c.getHeight());
         g.drawLine(0,c.getHeight(),0,0);
     }
 

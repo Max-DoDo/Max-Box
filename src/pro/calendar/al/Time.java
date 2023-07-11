@@ -13,6 +13,10 @@ package pro.calendar.al;
  **/
 public class Time {
 
+    public static final boolean TOWARD = true;
+
+    public static final boolean BACKWARD = false;
+
     private int year;
 
     private int month;
@@ -60,9 +64,9 @@ public class Time {
         return EQUAL;
     }
 
-    public void stepMonth(boolean toward){
+    public void stepMonth(boolean direction){
 
-        if(toward){
+        if(direction){
             if(this.month == 12){
                 this.month = 1;
                 year++;

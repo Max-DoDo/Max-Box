@@ -1,4 +1,4 @@
-package pro.base;
+package tools;
 
 import javax.swing.border.Border;
 import java.awt.*;
@@ -30,7 +30,7 @@ public class RoundBorder implements Border {
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 
         //设置边框颜色
-        g.setColor(Color.GRAY);
+        g.setColor(MColor.LINE);
         g.drawRoundRect(0, 0, c.getWidth() - 1, c.getHeight() - 1, 5, 5);
     }
 

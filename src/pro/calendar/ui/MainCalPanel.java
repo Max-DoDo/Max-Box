@@ -2,7 +2,7 @@ package pro.calendar.ui;
 
 import pro.base.SuperCPanel;
 import pro.calendar.al.GridGenerator;
-import pro.calendar.al.MCalendar;
+import pro.calendar.al.Time;
 import tools.Constant;
 import tools.MColor;
 
@@ -89,7 +89,7 @@ public class MainCalPanel extends SuperCPanel {
         }
 
         //初始化每一个格子的内容
-        this.updateDate(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
+//        this.updateDate(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
     }
 
     /**
@@ -101,6 +101,13 @@ public class MainCalPanel extends SuperCPanel {
     public void updateDate(int yr, int mth) {
 
         DateGrid todayGrid = new GridGenerator(yr,mth).generator(dateGrids);
+        if(todayGrid != null){
+            todayGrid.click();
+        }
+    }
+
+    public void updateDate(Time time){
+        DateGrid todayGrid = new GridGenerator(time.getYear(),time.getMonth()).generator(dateGrids);
         if(todayGrid != null){
             todayGrid.click();
         }
