@@ -6,15 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="fcb9a8ee-a496-4f02-8486-e6f163263ce0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/base/RoundBorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tools/RoundBorder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/base/RoundButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/base/RoundButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/calendar/al/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/al/Time.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pro/calendar/al/GridGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/al/GridGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pro/calendar/al/MCalendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/al/MCalendar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/CalendarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/CalendarPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/MainCalPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/MainCalPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/PanelBorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/PanelBorder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pro/calendar/ui/WeekPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pro/calendar/ui/WeekPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tools/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tools/Constant.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,21 +53,22 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Project/Java/Max-Box&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.14508393&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "D:/Programme/jdk17",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.14508393",
+    "settings.editor.selected.configurable": "advanced.settings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Project\Java\MTools" />

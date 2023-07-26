@@ -2,6 +2,7 @@ package pro.calendar.ui;
 
 import pro.base.SuperCPanel;
 import pro.calendar.al.GridGenerator;
+import pro.calendar.al.MCalendar;
 import pro.calendar.al.Time;
 import tools.Constant;
 import tools.MColor;
@@ -89,7 +90,7 @@ public class MainCalPanel extends SuperCPanel {
         }
 
         //初始化每一个格子的内容
-//        this.updateDate(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
+        this.updateDate(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
     }
 
     /**
@@ -101,15 +102,24 @@ public class MainCalPanel extends SuperCPanel {
     public void updateDate(int yr, int mth) {
 
         DateGrid todayGrid = new GridGenerator(yr,mth).generator(dateGrids);
-        if(todayGrid != null){
-            todayGrid.click();
-        }
+        setHighlightGrid(todayGrid);
     }
 
     public void updateDate(Time time){
         DateGrid todayGrid = new GridGenerator(time.getYear(),time.getMonth()).generator(dateGrids);
+        setHighlightGrid(todayGrid);
+    }
+
+    /**
+     * 当当前的月份更改的时候, 重新绘制高亮的日期格子, 代表"今天".
+     * @param todayGrid 月份
+     */
+    private void setHighlightGrid(DateGrid todayGrid){
         if(todayGrid != null){
-            todayGrid.click();
+            if(!todayGrid.isPreSelected()){
+                todayGrid.click();
+
+            }
         }
     }
 

@@ -13,7 +13,9 @@ import java.awt.*;
  *      日历面板
  * </h2>
  * <p>
- *      这个类是日历面板的实现类. 是{@link MainPanel}面板的子组件. 它是最底层的实现类, 他的上面还会覆盖许多其他的面板
+ *      这个类是日历面板的实现类. 是{@link MainPanel}面板的子组件.
+ *      它是最底层的实现类, 只用来当作一个"载体", 在其之上的所有面板都是实现日历某一部分功能的功能面板.
+ *      因此这个类只用来承载和初始化这些面板, 以及负责一些面板之间的信息传递.
  * </p>
  *
  * @author Max
@@ -23,14 +25,29 @@ import java.awt.*;
  **/
 public final class CalendarPanel extends SuperCPanel {
 
+    /**
+     * 当前日历所展示的时间, 用于在其子面板传递信息时用
+     */
     Time currentTime;
 
+    /**
+     * 展示月份的日历面板
+     */
     MainCalPanel mainCalPanel;
 
+    /**
+     * 功能面板
+     */
     FunctionPanel functionPanel;
 
+    /**
+     * 侧边面板
+     */
     SidePanel sidePanel;
 
+    /**
+     * 展示星期几的面板
+     */
     WeekPanel weekPanel;
 
 
@@ -60,7 +77,6 @@ public final class CalendarPanel extends SuperCPanel {
         this.add(weekPanel);
 
         mainCalPanel = new MainCalPanel(this);
-        mainCalPanel.updateDate(currentTime);
         this.add(mainCalPanel);
     }
 

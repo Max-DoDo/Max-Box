@@ -148,7 +148,6 @@ public class WeekPanel extends SuperCPanel implements ActionListener {
             Time current = new Time(MCalendar.getCurrentYear(),MCalendar.getCurrentMonth());
             System.out.println(current);
             father.updateMonth(current);
-            return;
         }
     }
 }

@@ -16,7 +16,7 @@ import java.util.Calendar;
  **/
 public final class MCalendar {
 
-    private static final Calendar cal = Calendar.getInstance();
+    private static Calendar cal = Calendar.getInstance();
     ;
 
     public static int getCurrentYear() {
@@ -46,6 +46,11 @@ public final class MCalendar {
         cal.set(Calendar.DAY_OF_MONTH, 1);
     }
 
+    public static void resetDate(){
+        cal = Calendar.getInstance();
+    }
+
+
     /**
      * 获得指定月份的总天数
      * @return 月份的总天数
@@ -67,8 +72,5 @@ public final class MCalendar {
         return day;
 
     }
-
-
-
 
 }

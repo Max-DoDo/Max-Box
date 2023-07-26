@@ -131,6 +131,7 @@ public class GridGenerator extends Object{
     public DateGrid generator(DateGrid[][] dateGrids){
 
         this.dg = dateGrids;
+        resetPattern();
 
         //第一个格子至少也要展示月份
         dg[0][0].setShowMonth(true);
@@ -138,10 +139,29 @@ public class GridGenerator extends Object{
         this.lastMonth();
         this.thisMonth();
         this.nextMonth();
+        MCalendar.resetDate();
 
         return todayGrid;
     }
 
+    /**
+     * 将所有日期格子的"是否显示月份"和"是否显示年份"的属性值重新设置为否
+     */
+    private void resetPattern(){
+        for (DateGrid[] dateGrids : dg) {
+            for (int j = 0; j < dg[0].length; j++) {
+
+                dateGrids[j].setShowYear(false);
+                dateGrids[j].setShowMonth(false);
+            }
+        }
+    }
+
+    /**
+     * 设置一个日期格子的内容
+     * @param dateGrid 日期格子
+     * @param time 日期格子所代表的时间
+     */
     private void generatorGrid(DateGrid dateGrid,Time time){
 
         dateGrid.setTime(time);
@@ -150,15 +170,19 @@ public class GridGenerator extends Object{
 
         switch (st){
             case Time.EQUAL -> {
+                dateGrid.setPasted(false);
                 dateGrid.setHighLight(true);
                 todayGrid = dateGrid;
             }
 
             case Time.OLDER ->  {
                 dateGrid.setPasted(true);
+                dateGrid.setHighLight(false);
 
             }
             case Time.YOUNGER -> {
+                dateGrid.setPasted(false);
+                dateGrid.setHighLight(false);
             }
 
         }
@@ -178,7 +202,6 @@ public class GridGenerator extends Object{
                 dg[0][0].setShowYear(true);
             }else{
                 dg[0][0].setShowMonth(true);
-
             }
 
             //把日历调整为当前的月份, 且日期为1
@@ -187,8 +210,6 @@ public class GridGenerator extends Object{
             int total = MCalendar.getTotalDayInMonth();
 
             int last = total - blank;
-
-
 
             for (int i = total; i > last; i--) {
                 this.generatorGrid(dg[blank - 1][0],new Time(year, month, i));
@@ -199,8 +220,10 @@ public class GridGenerator extends Object{
         }
     }
 
+    /**
+     *
+     */
     private void thisMonth(){
-        //==========================================初始化这个月
         //使用单循环手动递增第二维度索引
 
         this.updateCalendar(true);
@@ -209,6 +232,7 @@ public class GridGenerator extends Object{
             dg[x][y].setShowYear(true);
         }else{
             dg[x][y].setShowMonth(true);
+
         }
 
         for (int i = 1; i <= dayOfMonth; i++) {
@@ -226,7 +250,6 @@ public class GridGenerator extends Object{
     }
 
     private void nextMonth(){
-        //========================================================
         //初始化下个月的格子
         //顺序化x避免上次用完后顶到头了溢出了
         if (x == dg.length) {
