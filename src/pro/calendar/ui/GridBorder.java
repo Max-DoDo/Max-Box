@@ -35,8 +35,7 @@ public class GridBorder implements Border {
 
     @Override
     public Insets getBorderInsets(Component c) {
-        Insets insets = new Insets(0, 0, 0, 0);
-        return insets;
+        return new Insets(0, 0, 0, 0);
     }
 
     @Override

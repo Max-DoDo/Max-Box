@@ -4,6 +4,7 @@ import tools.MColor;
 import tools.PropertiesReader;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * <h2>
@@ -22,6 +23,8 @@ public class MFrame extends JFrame {
      * 标题栏面板
      */
     public TitlePanel titlePanel;
+
+    private ResizeAdapter resizeAdapter;
 
     /**
      * UI目前是否是全屏状态. 用于TitlePanel中控制最大化按钮的行为
@@ -49,6 +52,14 @@ public class MFrame extends JFrame {
         titlePanel.setIcon(icon);
     }
 
+    /**
+     * 设置顶部标题栏中文字的颜色
+     * @param color 文字的颜色
+     */
+    public void setTitleTextColor(Color color){
+        titlePanel.setTextColor(color);
+    }
+
     private void init(){
         //设置退出按钮
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -57,7 +68,7 @@ public class MFrame extends JFrame {
         this.setUndecorated(true);
 
         //用于设置在窗体的边框取消后仍然可以拉伸
-        ResizeAdapter resizeAdapter = new ResizeAdapter(this);
+        resizeAdapter = new ResizeAdapter(this);
 
         //添加监听
         this.addMouseListener(resizeAdapter);
@@ -115,6 +126,33 @@ public class MFrame extends JFrame {
         this.titlePanel.rePaint();
 
     }
+
+    /**
+     * 设置窗体是否可以通过拖动边框调整大小
+     * @param isResizeable true for can resize
+     */
+    public void setResizeable(boolean isResizeable){
+
+        if(isResizeable){
+            //如果当前窗体没有相关的事件则添加事件
+            if(this.getMouseListeners().length == 0 &&
+            this.getMouseMotionListeners().length == 0){
+
+                //添加监听
+                this.addMouseListener(resizeAdapter);
+                this.addMouseMotionListener(resizeAdapter);
+            }
+
+        }else{
+            if(this.getMouseListeners().length != 0 &&
+                this.getMouseMotionListeners().length != 0){
+
+                this.removeMouseListener(resizeAdapter);
+                this.removeMouseMotionListener(resizeAdapter);
+            }
+        }
+    }
+
 
     /**
      * 更新该窗体是否是全屏状态

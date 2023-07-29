@@ -60,6 +60,8 @@ public class MColor {
 
     public static Color BUTTON_PRESSING1;
 
+    public static Color SAVE_EVENT_BUTTON;
+
     /**
      * 今天及以后日期格子正常颜色
      */
@@ -112,7 +114,7 @@ public class MColor {
         LINE = new Color(82, 82, 82);
         FONT = new Color(214, 214, 214);
 
-        MAIN_PANEL = new Color(100, 100, 100);
+        MAIN_PANEL = new Color(41, 41, 41);
         TITLE_PANEL = new Color(10, 10, 10);
         SIDE_PANEL = new Color(41, 41, 41);
 
@@ -122,6 +124,8 @@ public class MColor {
 
         BUTTON_ROLLOVER = new Color(46, 46, 46);
         BUTTON_ROLLOVER1 = new Color(51,51,51);
+
+        SAVE_EVENT_BUTTON = new Color(0, 120, 212);
 
         //日历
         CB_FUTURE = new Color(41, 41, 41);
@@ -147,6 +151,8 @@ public class MColor {
 
         BUTTON_ROLLOVER = new Color(235, 235, 235);
         BUTTON_ROLLOVER1 = new Color(235,235,235);
+
+        SAVE_EVENT_BUTTON = new Color(0, 120, 212);
 
         //日历
         CB_FUTURE = new Color(255,255,255);

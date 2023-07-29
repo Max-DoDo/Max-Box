@@ -265,6 +265,10 @@ public class TitlePanel extends JPanel implements ActionListener, MouseListener,
 
     }
 
+    public void setTextColor(Color color){
+        titleText.setForeground(color);
+    }
+
     /**
      * 重绘老三样的颜色,位置, 修改大小按钮的图标
      */

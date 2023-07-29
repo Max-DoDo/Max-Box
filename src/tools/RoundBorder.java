@@ -8,7 +8,7 @@ import java.awt.*;
  * 边界类, 用于绘制圆角矩形的边界
  * </h2>
  * <p>
- * 构造本类对象可以让swing控件的边界被划为圆角矩形
+ * 构造本类对象可以让swing控件的边界被绘制为圆角矩形
  * </p>
  *
  * @author Max
@@ -36,8 +36,7 @@ public class RoundBorder implements Border {
 
     @Override
     public Insets getBorderInsets(Component c) {
-        Insets insets = new Insets(0, 0, 0, 0);
-        return insets;
+        return new Insets(0, 0, 0, 0);
     }
 
     @Override
