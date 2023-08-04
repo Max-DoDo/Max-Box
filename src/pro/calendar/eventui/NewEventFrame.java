@@ -2,6 +2,7 @@ package pro.calendar.eventui;
 
 import pro.base.MFrame;
 import pro.calendar.al.Event;
+import pro.calendar.al.Time;
 import pro.calendar.ui.CalButton;
 import tools.Constant;
 import tools.MColor;
@@ -36,16 +37,6 @@ public class NewEventFrame extends MFrame implements MouseListener {
     private int y;
 
     /**
-     * 窗体的宽度
-     */
-    private int width;
-
-    /**
-     * 窗体的高度
-     */
-    private int height;
-
-    /**
      * 保存事件按钮
      */
     private CalButton createEventButton;
@@ -68,15 +59,17 @@ public class NewEventFrame extends MFrame implements MouseListener {
     /**
      * 本类的构造函数. 通过调用该方法创建对象来自动的新建并且打开一个"新建事件"的窗口.
      */
-    public NewEventFrame() {
+    public NewEventFrame(Time time) {
+
         super(" 新事件 - 日历");
 
-        width = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
-        height = Integer.parseInt(PropertiesReader.get("ScreenHeight"));
+        int width = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
+        int height = Integer.parseInt(PropertiesReader.get("ScreenHeight"));
 
         width = width / 4 * 3;
         height = height / 4 * 3;
 
+        event = new Event();
 
         this.setSize(width, height);
         this.initLocation();
@@ -95,19 +88,22 @@ public class NewEventFrame extends MFrame implements MouseListener {
 
         //初始化保存事件的按钮
         createEventButton = new CalButton("保存");
-        createEventButton.setSize(width / 10, Constant.TITLE_PANEL_HEIGHT);
+        createEventButton.setSize(this.getWidth() / 10, Constant.TITLE_PANEL_HEIGHT);
         createEventButton.setLocation(10, Constant.TITLE_PANEL_HEIGHT + 10);
         createEventButton.setBackground(MColor.SAVE_EVENT_BUTTON);
         createEventButton.setFont(new Font(PropertiesReader.get("GlobalFont"),
                 Font.BOLD,
                 Integer.parseInt(PropertiesReader.get("FontSize")) - 3));
         createEventButton.setForeground(Color.BLACK);
+        createEventButton.setArmedColor(new Color(87, 170, 247));
+        createEventButton.setRolloverColor(new Color(100, 180, 250));
         createEventButton.addMouseListener(this);
         this.add(createEventButton);
 
+        //取消按钮
         cancelEventButton = new CalButton("放弃");
-        cancelEventButton.setSize(width/10, Constant.TITLE_PANEL_HEIGHT);
-        cancelEventButton.setLocation(width - cancelEventButton.getWidth() - 10,Constant.TITLE_PANEL_HEIGHT + 10);
+        cancelEventButton.setSize(this.getWidth() / 10, Constant.TITLE_PANEL_HEIGHT);
+        cancelEventButton.setLocation(this.getWidth() - cancelEventButton.getWidth() - 10, Constant.TITLE_PANEL_HEIGHT + 10);
         cancelEventButton.setFont(new Font(PropertiesReader.get("GlobalFont"),
                 Font.BOLD,
                 Integer.parseInt(PropertiesReader.get("FontSize")) - 3));
@@ -115,8 +111,8 @@ public class NewEventFrame extends MFrame implements MouseListener {
         this.add(cancelEventButton);
 
         eventPanel = new NewEventPanel();
-        eventPanel.setSize(width,height - (Constant.TITLE_PANEL_HEIGHT * 2 + 10 + 10));
-        eventPanel.setLocation(0,Constant.TITLE_PANEL_HEIGHT * 2 + 10 + 10);
+        eventPanel.setSize(this.getWidth(), this.getHeight() - (Constant.TITLE_PANEL_HEIGHT * 2 + 10 + 10));
+        eventPanel.setLocation(0, Constant.TITLE_PANEL_HEIGHT * 2 + 10 + 10);
 
         this.add(eventPanel);
 
@@ -130,7 +126,10 @@ public class NewEventFrame extends MFrame implements MouseListener {
         eventPanel.rePaint();
     }
 
-    private void rePaint(){
+    private void rePaint() {
+
+        cancelEventButton.setLocation(this.getWidth() - cancelEventButton.getWidth() - 10, Constant.TITLE_PANEL_HEIGHT + 10);
+        eventPanel.setSize(this.getWidth(), this.getHeight() - (Constant.TITLE_PANEL_HEIGHT * 2 + 10 + 10));
 
     }
 
@@ -138,10 +137,17 @@ public class NewEventFrame extends MFrame implements MouseListener {
         x = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
         y = Integer.parseInt(PropertiesReader.get("ScreenHeight"));
 
-        x = (x - width) / 2;
-        y = (y - height) / 2;
+        x = (x - this.getWidth()) / 2;
+        y = (y - this.getHeight()) / 2;
 
-        this.setLocation(x,y);
+        this.setLocation(x, y);
+    }
+
+    /**
+     * 保存事件按钮单击的事件处理方法
+     */
+    private void saveEvent() {
+        System.out.println("save event");
     }
 
     @Override
@@ -161,6 +167,17 @@ public class NewEventFrame extends MFrame implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        Object source = e.getSource();
+
+        if (source.equals(createEventButton)) {
+            this.saveEvent();
+            return;
+        }
+
+        if (source.equals(cancelEventButton)) {
+            this.exit();
+            return;
+        }
 
     }
 

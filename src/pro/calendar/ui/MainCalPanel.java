@@ -11,10 +11,10 @@ import java.awt.*;
 
 /**
  * <h2>
- * 显示某月日历的面板实现类
+ *      显示某月日历的面板实现类
  * </h2>
  * <p>
- *
+ *      这个面板只用于展示某月日历, 承载42个日期格子
  * </p>
  *
  * @author Max
@@ -37,10 +37,24 @@ public class MainCalPanel extends SuperCPanel {
      */
     private final GridBagLayout gbLayout;
 
+    /**
+     * 本类对象的上层面板. 用于通过上层面板的大小设置本类对象的大小
+     */
     private final CalendarPanel father;
 
+    /**
+     * 当前日历所在的年份
+     */
     private int year;
+
+    /**
+     * 当前日历所在的月份
+     */
     private int month;
+
+    /**
+     * 当前日历所在的日期
+     */
     private int day;
 
     /**

@@ -186,11 +186,15 @@ public final class DateGrid extends JPanel implements MouseListener {
 
     /**
      * 鼠标单击本面板的实现方法
+     *
+     * 这个方法会在两次单击日期格子后创建一个"新事件"窗体用于创建新事件
+     *
      */
     public void click() {
         if(this.isPreSelected){
             //点击过两次
-            new NewEventFrame();
+            //通过本日期格子的时间创建
+            new NewEventFrame(this.time);
         }else{
             //点击了一次
             this.isPreSelected = true;
@@ -278,8 +282,6 @@ public final class DateGrid extends JPanel implements MouseListener {
         isShowYear = showYear;
         this.textButton.setShowYear(showYear);
     }
-
-
 
     @Override
     public void mousePressed(MouseEvent e) {

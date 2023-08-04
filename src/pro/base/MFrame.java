@@ -8,9 +8,10 @@ import java.awt.*;
 
 /**
  * <h2>
- *
+ *  个性化一点的JFrame. 这是所有本程序使用的Frame的共同超类
  * </h2>
  * <p>
+ *  这个Frame取消了自带的标题栏, 并且自定义了一个标题栏. 让他的配色更加"现代"
  *
  * </p>
  *
@@ -24,6 +25,9 @@ public class MFrame extends JFrame {
      */
     public TitlePanel titlePanel;
 
+    /**
+     * 用于修改窗体大小的工具类
+     */
     private ResizeAdapter resizeAdapter;
 
     /**
@@ -31,6 +35,10 @@ public class MFrame extends JFrame {
      */
     public boolean isFullScreen;
 
+
+    /**
+     * 默认的构造函数, 使用这个构造函数创建本类对象会创建一个没有标题文本或者图片的窗体
+     */
     public MFrame(){
 
         titlePanel = new TitlePanel();
@@ -60,6 +68,9 @@ public class MFrame extends JFrame {
         titlePanel.setTextColor(color);
     }
 
+    /**
+     * 构造函数调用的初始化函数, 用于设置所有本类对象都相同的参数
+     */
     private void init(){
         //设置退出按钮
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

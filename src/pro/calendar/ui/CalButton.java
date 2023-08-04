@@ -18,6 +18,10 @@ import java.awt.*;
  **/
 public class CalButton extends JButton {
 
+    Color armedColor;
+
+    Color rolloverColor;
+
     public CalButton() {
         init();
     }
@@ -34,6 +38,14 @@ public class CalButton extends JButton {
 
     }
 
+    public void setArmedColor(Color armedColor){
+        this.armedColor = armedColor;
+    }
+
+    public void setRolloverColor(Color rolloverColor){
+        this.rolloverColor = rolloverColor;
+    }
+
     private void init(){
         this.setFocusPainted(false);
         this.setBackground(MColor.SIDE_PANEL);
@@ -48,12 +60,22 @@ public class CalButton extends JButton {
         ButtonModel model = this.getModel();
 
         if (model.isArmed()) {
-            g.setColor(MColor.BUTTON_PRESSING1);
+
+            if(this.armedColor != null){
+                g.setColor(armedColor);
+            }else{
+                g.setColor(MColor.BUTTON_PRESSING1);
+            }
+
         } else if(model.isRollover()){
-            g.setColor(MColor.BUTTON_ROLLOVER1);
+
+            if(this.rolloverColor != null){
+                g.setColor(rolloverColor);
+            }else{
+                g.setColor(MColor.BUTTON_ROLLOVER1);
+            }
         }else{
             g.setColor(this.getBackground());
-
         }
 
         //填充圆角矩形边界
