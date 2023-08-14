@@ -18,8 +18,14 @@ import javax.swing.*;
  */
 public class NewEventPanel extends JPanel {
 
+    /**
+     * 窗体内控件距离左侧面板边缘的距离
+     */
     private final int LEFT_SIDE_WIDTH = 50;
 
+    /**
+     * 事件标题
+     */
     private JTextField title;
 
     /**
@@ -32,7 +38,13 @@ public class NewEventPanel extends JPanel {
      */
     private JTextArea textArea;
 
-    NewEventPanel(){
+    /**
+     * 无参构造函数, 这应该也会是本类的唯一一个构造函数
+     * <p>
+     * 在这个构造函数中设置面板的边框, 背景颜色和编码
+     * </p>
+     */
+    public NewEventPanel() {
 
         this.setBorder(new GridBorder());
         this.setLayout(null);
@@ -44,10 +56,17 @@ public class NewEventPanel extends JPanel {
 
     /**
      * 初始化内部的组件
+     * <p>
+     * 这个方法由构造方法调用, 用于初始化窗体内的控件
+     * <p>
+     * * 标题文本框
+     * * 注释文本框
+     * </p>
      */
-    private void init(){
+    private void init() {
 
         //初始化标题文本框
+        //TODO working on it!
         title = new JTextField();
         title.setBackground(MColor.MAIN_PANEL);
         title.setForeground(MColor.FONT);
@@ -68,15 +87,19 @@ public class NewEventPanel extends JPanel {
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         comment.setBackground(MColor.MAIN_PANEL);
+//        comment.setViewportBorder(new PanelBorder());
 
         this.add(comment);
-
 
         this.rePaint();
     }
 
-    public void rePaint(){
-        title.setBounds(LEFT_SIDE_WIDTH,20,this.getWidth() - LEFT_SIDE_WIDTH * 2, 40);
-        comment.setBounds(LEFT_SIDE_WIDTH,200,this.getWidth() - LEFT_SIDE_WIDTH * 2, 120);
+    /**
+     * 重绘本类对象的方法, 这个方法会重新设置本类对象的位置和大小
+     * 这个方法会在本类对象初始化的时候被自动调用一次用于初始化控件的位置和大小
+     */
+    public void rePaint() {
+        title.setBounds(LEFT_SIDE_WIDTH, 20, this.getWidth() - LEFT_SIDE_WIDTH * 2, 40);
+        comment.setBounds(LEFT_SIDE_WIDTH, 200, this.getWidth() - LEFT_SIDE_WIDTH * 2, 120);
     }
 }

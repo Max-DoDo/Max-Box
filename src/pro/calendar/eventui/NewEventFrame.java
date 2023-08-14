@@ -54,7 +54,7 @@ public class NewEventFrame extends MFrame implements MouseListener {
     /**
      * 事件对象
      */
-    private Event event;
+    private final Event event;
 
     /**
      * 本类的构造函数. 通过调用该方法创建对象来自动的新建并且打开一个"新建事件"的窗口.
@@ -119,6 +119,9 @@ public class NewEventFrame extends MFrame implements MouseListener {
         this.rePaintAll();
     }
 
+    /**
+     * 重绘本窗体的所有内容, 用于在改变大小, 改变位置等操作窗体的方法结束后使UI仍保持相对正常的显示
+     */
     @Override
     public void rePaintAll() {
         super.rePaintAll();
@@ -126,6 +129,9 @@ public class NewEventFrame extends MFrame implements MouseListener {
         eventPanel.rePaint();
     }
 
+    /**
+     * 重绘本类窗体
+     */
     private void rePaint() {
 
         cancelEventButton.setLocation(this.getWidth() - cancelEventButton.getWidth() - 10, Constant.TITLE_PANEL_HEIGHT + 10);
@@ -133,6 +139,9 @@ public class NewEventFrame extends MFrame implements MouseListener {
 
     }
 
+    /**
+     * 初始化窗体的位置
+     */
     private void initLocation() {
         x = Integer.parseInt(PropertiesReader.get("ScreenWidth"));
         y = Integer.parseInt(PropertiesReader.get("ScreenHeight"));
